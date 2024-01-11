@@ -1,0 +1,184 @@
+22 serialization::archive 19 0 0 0 0 40 /home/bluecore/Desktop/Pros/Main Project 40 /home/bluecore/Desktop/Pros/Main Project 0 0 287 0 0 0 748 /*
+ * \file pros/llemu.hpp
+ *
+ * Legacy LCD Emulator
+ *
+ * This file defines a high-level API for emulating the three-button, UART-based
+ * VEX LCD, containing a set of functions that facilitate the use of a software-
+ * emulated version of the classic VEX LCD module.
+ *
+ * Visit https://pros.cs.purdue.edu/v5/tutorials/topical/llemu.html to learn
+ * more.
+ *
+ * This file should not be modified by users, since it gets replaced whenever
+ * a kernel upgrade occurs.
+ *
+ * \copyright Copyright (c) 2017-2023, Purdue University ACM SIGBots.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */ 1 1 21 4 18446744073709551615 1 # 23 1 23 2 18446744073709551615 6 ifndef 23 2 23 8 18446744073709551615 16 _PROS_LLEMU_HPP_ 23 9 23 25 18446744073709551615 1 # 24 1 24 2 18446744073709551615 6 define 24 2 24 8 18446744073709551615 16 _PROS_LLEMU_HPP_ 24 9 24 25 18446744073709551615 1 # 26 1 26 2 18446744073709551615 7 include 26 2 26 9 18446744073709551615 1 < 26 10 26 11 18446744073709551615 7 cstdint 26 11 26 18 18446744073709551615 1 > 26 18 26 19 18446744073709551615 1 # 27 1 27 2 18446744073709551615 7 include 27 2 27 9 18446744073709551615 1 < 27 10 27 11 18446744073709551615 6 string 27 11 27 17 18446744073709551615 1 > 27 17 27 18 18446744073709551615 1 # 29 1 29 2 18446744073709551615 7 include 29 2 29 9 18446744073709551615 14 "pros/llemu.h" 29 10 29 24 18446744073709551615 9 namespace 31 1 31 10 18446744073709551615 4 pros 31 11 31 15 0 1 { 31 16 31 17 18446744073709551615 9 namespace 32 1 32 10 18446744073709551615 3 lcd 32 11 32 14 1 1 { 32 15 32 16 18446744073709551615 153 /**
+ * Checks whether the emulated three-button LCD has already been initialized.
+ *
+ * \return True if the LCD has been initialized or false if not.
+ */ 33 1 37 4 18446744073709551615 4 bool 38 1 38 5 18446744073709551615 14 is_initialized 38 6 38 20 2 1 ( 38 20 38 21 2 4 void 38 21 38 25 18446744073709551615 1 ) 38 25 38 26 2 1 ; 38 26 38 27 18446744073709551615 195 /**
+ * Creates an emulation of the three-button, UART-based VEX LCD on the display.
+ *
+ * \return True if the LCD was successfully initialized, or false if it has
+ * already been initialized.
+ */ 40 1 45 4 18446744073709551615 4 bool 46 1 46 5 18446744073709551615 10 initialize 46 6 46 16 3 1 ( 46 16 46 17 3 4 void 46 17 46 21 18446744073709551615 1 ) 46 21 46 22 3 1 ; 46 22 46 23 18446744073709551615 486 /**
+ * Turns off the Legacy LCD Emulator.
+ *
+ * Calling this function will clear the entire display, and you will not be able
+ * to call any further LLEMU functions until another call to lcd_initialize.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The LCD has not been initialized. Call lcd_initialize() first.
+ *
+ * \return True if the operation was successful, or false otherwise, setting
+ * errno values as specified above.
+ */ 48 1 60 4 18446744073709551615 4 bool 61 1 61 5 18446744073709551615 8 shutdown 61 6 61 14 4 1 ( 61 14 61 15 4 4 void 61 15 61 19 18446744073709551615 1 ) 61 19 61 20 4 1 ; 61 20 61 21 18446744073709551615 1 # 63 1 63 2 18446744073709551615 6 pragma 63 2 63 8 18446744073709551615 3 GCC 63 9 63 12 18446744073709551615 10 diagnostic 63 13 63 23 18446744073709551615 4 push 63 24 63 28 18446744073709551615 1 # 64 1 64 2 18446744073709551615 6 pragma 64 2 64 8 18446744073709551615 3 GCC 64 9 64 12 18446744073709551615 10 diagnostic 64 13 64 23 18446744073709551615 7 ignored 64 24 64 31 18446744073709551615 19 "-Wunused-function" 64 32 64 51 18446744073709551615 9 namespace 65 1 65 10 18446744073709551615 1 { 65 11 65 12 18446744073709551615 8 template 66 1 66 9 18446744073709551615 1 < 66 10 66 11 18446744073709551615 8 typename 66 11 66 19 18446744073709551615 1 T 66 20 66 21 5 1 > 66 21 66 22 18446744073709551615 1 T 67 1 67 2 5 12 convert_args 67 3 67 15 6 1 ( 67 15 67 16 18446744073709551615 1 T 67 16 67 17 5 3 arg 67 18 67 21 7 1 ) 67 21 67 22 18446744073709551615 1 { 67 23 67 24 18446744073709551615 6 return 68 2 68 8 18446744073709551615 3 arg 68 9 68 12 7 1 ; 68 12 68 13 18446744073709551615 1 } 69 1 69 2 18446744073709551615 5 const 70 1 70 6 18446744073709551615 4 char 70 7 70 11 18446744073709551615 1 * 70 11 70 12 6 12 convert_args 70 13 70 25 6 1 ( 70 25 70 26 6 5 const 70 26 70 31 18446744073709551615 3 std 70 32 70 35 8 2 :: 70 35 70 37 18446744073709551615 6 string 70 37 70 43 9 1 & 70 43 70 44 18446744073709551615 3 arg 70 45 70 48 10 1 ) 70 48 70 49 6 1 { 70 50 70 51 18446744073709551615 6 return 71 2 71 8 18446744073709551615 3 arg 71 9 71 12 10 1 . 71 12 71 13 11 5 c_str 71 13 71 18 11 1 ( 71 18 71 19 11 1 ) 71 19 71 20 11 1 ; 71 20 71 21 18446744073709551615 1 } 72 1 72 2 18446744073709551615 1 } 73 1 73 2 18446744073709551615 12 // namespace 73 4 73 16 18446744073709551615 1 # 74 1 74 2 18446744073709551615 6 pragma 74 2 74 8 18446744073709551615 3 GCC 74 9 74 12 18446744073709551615 10 diagnostic 74 13 74 23 18446744073709551615 3 pop 74 24 74 27 18446744073709551615 607 /**
+ * Displays a formatted string on the emulated three-button LCD screen.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO  - The LCD has not been initialized. Call lcd_initialize() first.
+ * EINVAL - The line number specified is not in the range [0-7]
+ *
+ * \param line
+ *        The line on which to display the text [0-7]
+ * \param fmt
+ *        Format string
+ * \param ...
+ *        Optional list of arguments for the format string
+ *
+ * \return True if the operation was successful, or false otherwise, setting
+ * errno values as specified above.
+ */ 76 1 93 4 18446744073709551615 8 template 94 1 94 9 18446744073709551615 1 < 94 10 94 11 18446744073709551615 8 typename 94 11 94 19 18446744073709551615 3 ... 94 19 94 22 18446744073709551615 6 Params 94 23 94 29 12 1 > 94 29 94 30 18446744073709551615 4 bool 95 1 95 5 18446744073709551615 5 print 95 6 95 11 13 1 ( 95 11 95 12 18446744073709551615 3 std 95 12 95 15 8 2 :: 95 15 95 17 18446744073709551615 7 int16_t 95 17 95 24 14 4 line 95 25 95 29 14 1 , 95 29 95 30 18446744073709551615 5 const 95 31 95 36 18446744073709551615 4 char 95 37 95 41 18446744073709551615 1 * 95 41 95 42 18446744073709551615 3 fmt 95 43 95 46 15 1 , 95 46 95 47 18446744073709551615 6 Params 95 48 95 54 12 3 ... 95 54 95 57 18446744073709551615 4 args 95 58 95 62 16 1 ) 95 62 95 63 18446744073709551615 1 { 95 64 95 65 18446744073709551615 6 return 96 2 96 8 18446744073709551615 4 pros 96 9 96 13 0 2 :: 96 13 96 15 17 1 c 96 15 96 16 18 2 :: 96 16 96 18 17 9 lcd_print 96 18 96 27 17 1 ( 96 27 96 28 17 4 line 96 28 96 32 14 1 , 96 32 96 33 17 3 fmt 96 34 96 37 15 1 , 96 37 96 38 17 12 convert_args 96 39 96 51 19 1 ( 96 51 96 52 18446744073709551615 4 args 96 52 96 56 16 1 ) 96 56 96 57 18446744073709551615 3 ... 96 57 96 60 18446744073709551615 1 ) 96 60 96 61 17 1 ; 96 61 96 62 18446744073709551615 1 } 97 1 97 2 18446744073709551615 531 /**
+ * Displays a string on the emulated three-button LCD screen.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO  - The LCD has not been initialized. Call lcd_initialize() first.
+ * EINVAL - The line number specified is not in the range [0-7]
+ *
+ * \param line
+ *        The line on which to display the text [0-7]
+ * \param text
+ *        The text to display
+ *
+ * \return True if the operation was successful, or false otherwise, setting
+ * errno values as specified above.
+ */ 99 1 114 4 18446744073709551615 4 bool 115 1 115 5 18446744073709551615 8 set_text 115 6 115 14 20 1 ( 115 14 115 15 20 3 std 115 15 115 18 8 2 :: 115 18 115 20 18446744073709551615 7 int16_t 115 20 115 27 21 4 line 115 28 115 32 21 1 , 115 32 115 33 20 3 std 115 34 115 37 8 2 :: 115 37 115 39 18446744073709551615 6 string 115 39 115 45 9 4 text 115 46 115 50 22 1 ) 115 50 115 51 20 1 ; 115 51 115 52 18446744073709551615 416 /**
+ * Clears the contents of the emulated three-button LCD screen.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO  - The LCD has not been initialized. Call lcd_initialize() first.
+ * EINVAL - The line number specified is not in the range [0-7]
+ *
+ * \return True if the operation was successful, or false otherwise, setting
+ * errno values as specified above.
+ */ 117 1 127 4 18446744073709551615 4 bool 128 1 128 5 18446744073709551615 5 clear 128 6 128 11 23 1 ( 128 11 128 12 23 4 void 128 12 128 16 18446744073709551615 1 ) 128 16 128 17 23 1 ; 128 17 128 18 18446744073709551615 472 /**
+ * Clears the contents of a line of the emulated three-button LCD screen.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO  - The LCD has not been initialized. Call lcd_initialize() first.
+ * EINVAL - The line number specified is not in the range [0-7]
+ *
+ * \param line
+ *        The line to clear
+ *
+ * \return True if the operation was successful, or false otherwise, setting
+ * errno values as specified above.
+ */ 130 1 143 4 18446744073709551615 4 bool 144 1 144 5 18446744073709551615 10 clear_line 144 6 144 16 24 1 ( 144 16 144 17 24 3 std 144 17 144 20 8 2 :: 144 20 144 22 18446744073709551615 7 int16_t 144 22 144 29 25 4 line 144 30 144 34 25 1 ) 144 34 144 35 24 1 ; 144 35 144 36 18446744073709551615 5 using 146 1 146 6 18446744073709551615 15 lcd_btn_cb_fn_t 146 7 146 22 26 1 = 146 23 146 24 18446744073709551615 4 void 146 25 146 29 18446744073709551615 1 ( 146 30 146 31 18446744073709551615 1 * 146 31 146 32 18446744073709551615 1 ) 146 32 146 33 18446744073709551615 1 ( 146 33 146 34 18446744073709551615 4 void 146 34 146 38 18446744073709551615 1 ) 146 38 146 39 18446744073709551615 1 ; 146 39 146 40 18446744073709551615 285 /**
+ * Registers a callback function for the leftmost button.
+ *
+ * When the leftmost button on the emulated three-button LCD is pressed, the
+ * user-provided callback function will be invoked.
+ *
+ * \param cb
+ *        A callback function of type lcd_btn_cb_fn_t(void (*cb)(void))
+ */ 148 1 156 4 18446744073709551615 4 void 157 1 157 5 18446744073709551615 16 register_btn0_cb 157 6 157 22 27 1 ( 157 22 157 23 27 15 lcd_btn_cb_fn_t 157 23 157 38 26 2 cb 157 39 157 41 28 1 ) 157 41 157 42 27 1 ; 157 42 157 43 18446744073709551615 282 /**
+ * Registers a callback function for the center button.
+ *
+ * When the center button on the emulated three-button LCD is pressed, the
+ * user-provided callback function will be invoked.
+ *
+ * \param cb
+ *         A callback function of type lcd_btn_cb_fn_t(void (*cb)(void))
+ */ 159 1 167 4 18446744073709551615 4 void 168 1 168 5 18446744073709551615 16 register_btn1_cb 168 6 168 22 29 1 ( 168 22 168 23 29 15 lcd_btn_cb_fn_t 168 23 168 38 26 2 cb 168 39 168 41 30 1 ) 168 41 168 42 29 1 ; 168 42 168 43 18446744073709551615 288 /**
+ * Registers a callback function for the rightmost button.
+ *
+ * When the rightmost button on the emulated three-button LCD is pressed, the
+ * user-provided callback function will be invoked.
+ *
+ * \param cb
+ *         A callback function of type lcd_btn_cb_fn_t(void (*cb)(void))
+ */ 170 1 178 4 18446744073709551615 4 void 179 1 179 5 18446744073709551615 16 register_btn2_cb 179 6 179 22 31 1 ( 179 22 179 23 31 15 lcd_btn_cb_fn_t 179 23 179 38 26 2 cb 179 39 179 41 32 1 ) 179 41 179 42 31 1 ; 179 42 179 43 18446744073709551615 583 /**
+ * Gets the button status from the emulated three-button LCD.
+ *
+ * The value returned is a 3-bit integer where 1 0 0 indicates the left button
+ * is pressed, 0 1 0 indicates the center button is pressed, and 0 0 1
+ * indicates the right button is pressed. 0 is returned if no buttons are
+ * currently being pressed.
+ *
+ * Note that this function is provided for legacy API compatibility purposes,
+ * with the caveat that the V5 touch screen does not actually support pressing
+ * multiple points on the screen at the same time.
+ *
+ * \return The buttons pressed as a bit mask
+ */ 181 1 194 4 18446744073709551615 3 std 195 1 195 4 8 2 :: 195 4 195 6 33 7 uint8_t 195 6 195 13 33 12 read_buttons 195 14 195 26 33 1 ( 195 26 195 27 33 4 void 195 27 195 31 18446744073709551615 1 ) 195 31 195 32 33 1 ; 195 32 195 33 18446744073709551615 180 /**
+ * Changes the color of the LCD background to a provided color expressed in
+ * type lv_color_t.
+ *
+ * \param color
+ *         A color of type lv_color_t
+ * 
+ * \return void
+ */ 197 1 205 4 18446744073709551615 4 void 206 1 206 5 18446744073709551615 20 set_background_color 206 6 206 26 34 1 ( 206 26 206 27 34 10 lv_color_t 206 27 206 37 35 5 color 206 38 206 43 36 1 ) 206 43 206 44 34 1 ; 206 44 206 45 18446744073709551615 534 /**
+ * Changes the color of the LCD background to a provided color expressed in RGB
+ * form, with three values of type uint8_t.
+ *
+ * \param r
+ *         A value of type uint8_t, with a range of 0 to 255, representing the
+ *         red value of a color
+ * 
+ * \param g
+ *         A value of type uint8_t, with a range of 0 to 255, representing the
+ *         green value of a color
+ * 
+ * \param b
+ *         A value of type uint8_t, with a range of 0 to 255, representing the
+ *         blue value of a color
+ * 
+ * \return void
+ */ 208 1 225 4 18446744073709551615 4 void 226 1 226 5 18446744073709551615 20 set_background_color 226 6 226 26 34 1 ( 226 26 226 27 34 3 std 226 27 226 30 8 2 :: 226 30 226 32 18446744073709551615 7 uint8_t 226 32 226 39 37 1 r 226 40 226 41 37 1 , 226 41 226 42 34 3 std 226 43 226 46 8 2 :: 226 46 226 48 18446744073709551615 7 uint8_t 226 48 226 55 38 1 g 226 56 226 57 38 1 , 226 57 226 58 34 3 std 226 59 226 62 8 2 :: 226 62 226 64 18446744073709551615 7 uint8_t 226 64 226 71 39 1 b 226 72 226 73 39 1 ) 226 73 226 74 34 1 ; 226 74 226 75 18446744073709551615 173 /**
+ * Changes the text color of the LCD to a provided color expressed in
+ * type lv_color_t.
+ *
+ * \param color
+ *         A color of type lv_color_t
+ *
+ * \return void
+ */ 228 1 236 4 18446744073709551615 4 void 237 1 237 5 18446744073709551615 14 set_text_color 237 6 237 20 40 1 ( 237 20 237 21 40 10 lv_color_t 237 21 237 31 35 5 color 237 32 237 37 41 1 ) 237 37 237 38 40 1 ; 237 38 237 39 18446744073709551615 525 /**
+ * Changes the text color of the LCD to a provided color expressed in RGB
+ * form, with three values of type uint8_t.
+ *
+ * \param r
+ *         A value of type uint8_t, with a range of 0 to 255, representing the
+ *         red value of a color
+ *
+ * \param g
+ *         A value of type uint8_t, with a range of 0 to 255, representing the
+ *         green value of a color
+ *
+ * \param b
+ *         A value of type uint8_t, with a range of 0 to 255, representing the
+ *         blue value of a color
+ *
+ * \return void
+ */ 239 1 256 4 18446744073709551615 4 void 257 1 257 5 18446744073709551615 14 set_text_color 257 6 257 20 40 1 ( 257 20 257 21 40 3 std 257 21 257 24 8 2 :: 257 24 257 26 18446744073709551615 7 uint8_t 257 26 257 33 42 1 r 257 34 257 35 42 1 , 257 35 257 36 40 3 std 257 37 257 40 8 2 :: 257 40 257 42 18446744073709551615 7 uint8_t 257 42 257 49 43 1 g 257 50 257 51 43 1 , 257 51 257 52 40 3 std 257 53 257 56 8 2 :: 257 56 257 58 18446744073709551615 7 uint8_t 257 58 257 65 44 1 b 257 66 257 67 44 1 ) 257 67 257 68 40 1 ; 257 68 257 69 18446744073709551615 1 } 259 1 259 2 18446744073709551615 16 // namespace lcd 259 4 259 20 18446744073709551615 1 } 260 1 260 2 18446744073709551615 17 // namespace pros 260 4 260 21 18446744073709551615 1 # 262 1 262 2 18446744073709551615 5 endif 262 2 262 7 18446744073709551615 19 // _PROS_LLEMU_HPP_ 262 9 262 28 18446744073709551615 0 0 45 0 0 0 22 0 0 1 13 0 4 pros 22 1 13 0 8 lcd:pros 8 1 13 0 23 is_initialized:lcd:pros 8 1 13 0 19 initialize:lcd:pros 8 1 13 0 17 shutdown:lcd:pros 27 1 13 0 69 66:20:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 30 1 13 0 22 convert_args::lcd:pros 10 1 13 0 69 67:18:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 22 1 13 0 3 std 20 1 13 0 10 string:std 10 1 13 0 69 70:45:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 21 1 13 0 30 c_str:basic_string:__cxx11:std 27 1 13 0 69 94:23:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 30 1 13 0 14 print:lcd:pros 10 1 13 0 69 95:25:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 10 1 13 0 69 95:43:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 10 1 13 0 69 95:58:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 8 1 13 0 16 lcd_print:c:pros 22 1 13 0 6 c:pros 49 1 13 0 12 convert_args 8 1 13 0 17 set_text:lcd:pros 10 1 13 0 70 115:28:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 10 1 13 0 70 115:46:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 8 1 13 0 14 clear:lcd:pros 8 1 13 0 19 clear_line:lcd:pros 10 1 13 0 70 144:30:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 36 1 13 0 24 lcd_btn_cb_fn_t:lcd:pros 8 1 13 0 25 register_btn0_cb:lcd:pros 10 1 13 0 70 157:39:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 8 1 13 0 25 register_btn1_cb:lcd:pros 10 1 13 0 70 168:39:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 8 1 13 0 25 register_btn2_cb:lcd:pros 10 1 13 0 70 179:39:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 8 1 13 0 21 read_buttons:lcd:pros 8 1 13 0 29 set_background_color:lcd:pros 20 1 13 0 10 lv_color_t 10 1 13 0 70 206:38:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 10 1 13 0 70 226:40:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 10 1 13 0 70 226:56:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 10 1 13 0 70 226:72:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 8 1 13 0 23 set_text_color:lcd:pros 10 1 13 0 70 237:32:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 10 1 13 0 70 257:34:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 10 1 13 0 70 257:50:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 10 1 13 0 70 257:66:/home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 0 0 1 0 0 0 63 /home/bluecore/Desktop/Pros/Main Project/include/pros/llemu.hpp 1698321186

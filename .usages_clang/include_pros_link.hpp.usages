@@ -1,0 +1,156 @@
+22 serialization::archive 19 0 0 0 0 40 /home/bluecore/Desktop/Pros/Main Project 40 /home/bluecore/Desktop/Pros/Main Project 0 0 159 0 0 0 587 /**
+ * \file pros/link.hpp
+ *
+ * Contains prototypes for functions related to robot to robot communications.
+ *
+ * Visit https://pros.cs.purdue.edu/v5/tutorials/topical/link.html to learn
+ * more.
+ *
+ * This file should not be modified by users, since it gets replaced whenever
+ * a kernel upgrade occurs.
+ *
+ * \copyright Copyright (c) 2017-2023, Purdue University ACM SIGBots.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */ 1 1 17 4 18446744073709551615 1 # 18 1 18 2 18446744073709551615 6 ifndef 18 2 18 8 18446744073709551615 15 _PROS_LINK_HPP_ 18 9 18 24 18446744073709551615 1 # 19 1 19 2 18446744073709551615 6 define 19 2 19 8 18446744073709551615 15 _PROS_LINK_HPP_ 19 9 19 24 18446744073709551615 1 # 21 1 21 2 18446744073709551615 7 include 21 2 21 9 18446744073709551615 1 < 21 10 21 11 18446744073709551615 7 cstdint 21 11 21 18 18446744073709551615 1 > 21 18 21 19 18446744073709551615 1 # 22 1 22 2 18446744073709551615 7 include 22 2 22 9 18446744073709551615 1 < 22 10 22 11 18446744073709551615 6 string 22 11 22 17 18446744073709551615 1 > 22 17 22 18 18446744073709551615 1 # 24 1 24 2 18446744073709551615 7 include 24 2 24 9 18446744073709551615 13 "pros/link.h" 24 10 24 23 18446744073709551615 9 namespace 26 1 26 10 18446744073709551615 4 pros 26 11 26 15 0 1 { 26 16 26 17 18446744073709551615 5 class 27 1 27 6 18446744073709551615 4 Link 27 7 27 11 1 1 { 27 12 27 13 18446744073709551615 7 private 28 2 28 9 18446744073709551615 1 : 28 9 28 10 18446744073709551615 3 std 29 2 29 5 2 2 :: 29 5 29 7 18446744073709551615 7 uint8_t 29 7 29 14 3 5 _port 29 15 29 20 3 1 ; 29 20 29 21 18446744073709551615 6 public 31 2 31 8 18446744073709551615 1 : 31 8 31 9 18446744073709551615 1112 /**
+	 * Initializes a link on a radio port, with an indicated type. There might be a
+	 * 1 to 2 second delay from when this function is called to when the link is initializes.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as a radio.
+	 * ENXIO - The sensor is still calibrating, or no link is connected via the radio.
+	 *
+	 * \param port
+	 *      The port of the radio for the intended link.
+	 * \param link_id
+	 *      Unique link ID in the form of a string, needs to be different from other links in
+	 *      the area.
+	 * \param type
+	 *      Indicates whether the radio link on the brain is a transmitter or reciever,
+	 *      with the transmitter having double the transmitting bandwidth as the recieving
+	 *      end (1040 bytes/s vs 520 bytes/s).
+	 * \param ov
+	 * 		Indicates if the radio on the given port needs vexlink to override the controller radio
+	 *
+	 * \return PROS_ERR if initialization fails, 1 if the initialization succeeds.
+	 */ 32 2 55 5 18446744073709551615 4 Link 56 2 56 6 1 1 ( 56 6 56 7 1 5 const 56 7 56 12 18446744073709551615 3 std 56 13 56 16 2 2 :: 56 16 56 18 18446744073709551615 7 uint8_t 56 18 56 25 4 4 port 56 26 56 30 4 1 , 56 30 56 31 1 5 const 56 32 56 37 18446744073709551615 3 std 56 38 56 41 2 2 :: 56 41 56 43 18446744073709551615 6 string 56 43 56 49 5 7 link_id 56 50 56 57 6 1 , 56 57 56 58 1 13 link_type_e_t 56 59 56 72 7 4 type 56 73 56 77 8 1 , 56 77 56 78 1 4 bool 56 79 56 83 18446744073709551615 2 ov 56 84 56 86 9 1 = 56 87 56 88 18446744073709551615 5 false 56 89 56 94 18446744073709551615 1 ) 56 94 56 95 1 1 ; 56 95 56 96 18446744073709551615 447 /**
+	 * Checks if a radio link on a port is active or not.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as a radio.
+	 * ENXIO - The sensor is still calibrating, or no link is connected via the radio.
+	 *
+	 * \return If a radio is connected to a port and it's connected to a link.
+	 */ 58 2 68 5 18446744073709551615 4 bool 69 2 69 6 18446744073709551615 9 connected 69 7 69 16 10 1 ( 69 16 69 17 10 1 ) 69 17 69 18 10 1 ; 69 18 69 19 18446744073709551615 497 /**
+	 * Returns the bytes of data number of without protocol available to be read
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as a radio.
+	 * ENXIO - The sensor is still calibrating, or no link is connected via the radio.
+	 *
+	 * \return PROS_ERR if port is not a link/radio, else the bytes available to be
+	 * read by the user.
+	 */ 71 2 82 5 18446744073709551615 3 std 83 2 83 5 2 2 :: 83 5 83 7 11 8 uint32_t 83 7 83 15 11 19 raw_receivable_size 83 16 83 35 11 1 ( 83 35 83 36 11 1 ) 83 36 83 37 11 1 ; 83 37 83 38 18446744073709551615 430 /**
+	 * Returns the bytes of data available in transmission buffer.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as a radio.
+	 * ENXIO - The sensor is still calibrating, or no link is connected via the radio.
+	 *
+	 * \return PROS_ERR if port is not a link/radio,
+	 */ 85 2 95 5 18446744073709551615 3 std 96 2 96 5 2 2 :: 96 5 96 7 12 8 uint32_t 96 7 96 15 12 22 raw_transmittable_size 96 16 96 38 12 1 ( 96 38 96 39 12 1 ) 96 39 96 40 12 1 ; 96 40 96 41 18446744073709551615 765 /**
+	 * Send raw serial data through vexlink.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as a radio.
+	 * ENXIO - The sensor is still calibrating, or no link is connected via the radio.
+	 * EBUSY - The transmitter buffer is still busy with a previous transmission, and there is no
+	 * room in the FIFO buffer (queue) to transmit the data.
+	 * EINVAL - The data given is NULL
+	 *
+	 * \param data
+	 *      Buffer with data to send
+	 * \param data_size
+	 *      Buffer with data to send
+	 *
+	 * \return PROS_ERR if port is not a link, and the successfully transmitted 
+	 * data size if it succeeded.
+	 */ 98 2 117 5 18446744073709551615 3 std 118 2 118 5 2 2 :: 118 5 118 7 13 8 uint32_t 118 7 118 15 13 12 transmit_raw 118 16 118 28 13 1 ( 118 28 118 29 13 4 void 118 29 118 33 18446744073709551615 1 * 118 33 118 34 18446744073709551615 4 data 118 35 118 39 14 1 , 118 39 118 40 13 3 std 118 41 118 44 2 2 :: 118 44 118 46 18446744073709551615 8 uint16_t 118 46 118 54 15 9 data_size 118 55 118 64 15 1 ) 118 64 118 65 13 1 ; 118 65 118 66 18446744073709551615 732 /**
+	 * Receive raw serial data through vexlink.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as a radio.
+	 * ENXIO - The sensor is still calibrating, or no link is connected via the radio.
+	 * EINVAL - The destination given is NULL, or the size given is larger than the FIFO buffer
+	 * or destination buffer.
+	 *
+	 * \param dest
+	 *      Destination buffer to read data to
+	 * \param data_size
+	 *      Bytes of data to be read to the destination buffer
+	 *
+	 * \return PROS_ERR if port is not a link, and the successfully received 
+	 * data size if it succeeded.
+	 */ 120 2 138 5 18446744073709551615 3 std 139 2 139 5 2 2 :: 139 5 139 7 16 8 uint32_t 139 7 139 15 16 11 receive_raw 139 16 139 27 16 1 ( 139 27 139 28 16 4 void 139 28 139 32 18446744073709551615 1 * 139 32 139 33 18446744073709551615 4 dest 139 34 139 38 17 1 , 139 38 139 39 16 3 std 139 40 139 43 2 2 :: 139 43 139 45 18446744073709551615 8 uint16_t 139 45 139 53 18 9 data_size 139 54 139 63 18 1 ) 139 63 139 64 16 1 ; 139 64 139 65 18446744073709551615 824 /**
+	 * Send packeted message through vexlink, with a checksum and start byte.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as a radio.
+	 * ENXIO - The sensor is still calibrating, or no link is connected via the radio.
+	 * EBUSY - The transmitter buffer is still busy with a previous transmission, and there is no
+	 * room in the FIFO buffer (queue) to transmit the data.
+	 * EINVAL - The data given is NULL
+	 *
+	 * \param data
+	 *      Buffer with data to send
+	 * \param data_size
+	 *      Bytes of data to be read to the destination buffer
+	 *
+	 * \return PROS_ERR if port is not a link, and the successfully transmitted 
+	 * data size if it succeeded.
+	 */ 141 2 160 5 18446744073709551615 3 std 161 2 161 5 2 2 :: 161 5 161 7 19 8 uint32_t 161 7 161 15 19 8 transmit 161 16 161 24 19 1 ( 161 24 161 25 19 4 void 161 25 161 29 18446744073709551615 1 * 161 29 161 30 18446744073709551615 4 data 161 31 161 35 20 1 , 161 35 161 36 19 3 std 161 37 161 40 2 2 :: 161 40 161 42 18446744073709551615 8 uint16_t 161 42 161 50 21 9 data_size 161 51 161 60 21 1 ) 161 60 161 61 19 1 ; 161 61 161 62 18446744073709551615 838 /**
+	 * Receive packeted message through vexlink, with a checksum and start byte.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as a radio.
+	 * ENXIO - The sensor is still calibrating, or no link is connected via the radio.
+	 * EINVAL - The destination given is NULL, or the size given is larger than the FIFO buffer
+	 * or destination buffer.
+	 * EBADMSG - Protocol error related to start byte, data size, or checksum.
+
+	 * \param dest
+	 *      Destination buffer to read data to
+	 * \param data_size
+	 *      Bytes of data to be read to the destination buffer
+	 *
+	 * \return PROS_ERR if port is not a link, and the successfully received 
+	 * data size if it succeeded.
+	 */ 163 2 182 5 18446744073709551615 3 std 183 2 183 5 2 2 :: 183 5 183 7 22 8 uint32_t 183 7 183 15 22 7 receive 183 16 183 23 22 1 ( 183 23 183 24 22 4 void 183 24 183 28 18446744073709551615 1 * 183 28 183 29 18446744073709551615 4 dest 183 30 183 34 23 1 , 183 34 183 35 22 3 std 183 36 183 39 2 2 :: 183 39 183 41 18446744073709551615 8 uint16_t 183 41 183 49 24 9 data_size 183 50 183 59 24 1 ) 183 59 183 60 22 1 ; 183 60 183 61 18446744073709551615 454 /**
+	 * Clear the receive buffer of the link, and discarding the data.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as a radio.
+	 * ENXIO - The sensor is still calibrating, or no link is connected via the radio.
+
+	 * \return PROS_ERR if port is not a link, 1 if the operation succeeded.
+	 */ 185 2 195 5 18446744073709551615 3 std 196 2 196 5 2 2 :: 196 5 196 7 25 8 uint32_t 196 7 196 15 25 17 clear_receive_buf 196 16 196 33 25 1 ( 196 33 196 34 25 1 ) 196 34 196 35 25 1 ; 196 35 196 36 18446744073709551615 1 } 197 1 197 2 18446744073709551615 1 ; 197 2 197 3 18446744073709551615 1 } 198 1 198 2 18446744073709551615 17 // namespace pros 198 4 198 21 18446744073709551615 1 # 200 1 200 2 18446744073709551615 5 endif 200 2 200 7 18446744073709551615 0 0 26 0 0 0 22 0 0 1 13 0 4 pros 4 1 13 0 9 Link:pros 22 1 13 0 3 std 6 1 13 0 15 _port:Link:pros 10 1 13 0 68 56:26:/home/bluecore/Desktop/Pros/Main Project/include/pros/link.hpp 20 1 13 0 10 string:std 10 1 13 0 68 56:50:/home/bluecore/Desktop/Pros/Main Project/include/pros/link.hpp 20 1 13 0 18 link_type_e_t:pros 10 1 13 0 68 56:73:/home/bluecore/Desktop/Pros/Main Project/include/pros/link.hpp 10 1 13 0 68 56:84:/home/bluecore/Desktop/Pros/Main Project/include/pros/link.hpp 21 1 13 0 19 connected:Link:pros 21 1 13 0 29 raw_receivable_size:Link:pros 21 1 13 0 32 raw_transmittable_size:Link:pros 21 1 13 0 22 transmit_raw:Link:pros 10 1 13 0 69 118:35:/home/bluecore/Desktop/Pros/Main Project/include/pros/link.hpp 10 1 13 0 69 118:55:/home/bluecore/Desktop/Pros/Main Project/include/pros/link.hpp 21 1 13 0 21 receive_raw:Link:pros 10 1 13 0 69 139:34:/home/bluecore/Desktop/Pros/Main Project/include/pros/link.hpp 10 1 13 0 69 139:54:/home/bluecore/Desktop/Pros/Main Project/include/pros/link.hpp 21 1 13 0 18 transmit:Link:pros 10 1 13 0 69 161:31:/home/bluecore/Desktop/Pros/Main Project/include/pros/link.hpp 10 1 13 0 69 161:51:/home/bluecore/Desktop/Pros/Main Project/include/pros/link.hpp 21 1 13 0 17 receive:Link:pros 10 1 13 0 69 183:30:/home/bluecore/Desktop/Pros/Main Project/include/pros/link.hpp 10 1 13 0 69 183:50:/home/bluecore/Desktop/Pros/Main Project/include/pros/link.hpp 21 1 13 0 27 clear_receive_buf:Link:pros 0 0 1 0 0 0 62 /home/bluecore/Desktop/Pros/Main Project/include/pros/link.hpp 1698321194

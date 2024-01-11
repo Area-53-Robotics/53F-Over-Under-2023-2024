@@ -1,0 +1,79 @@
+22 serialization::archive 19 0 0 0 0 40 /home/bluecore/Desktop/Pros/Main Project 40 /home/bluecore/Desktop/Pros/Main Project 0 0 90 0 0 0 575 /**
+ * \file pros/distance.hpp
+ *
+ * Contains prototypes for the V5 Distance Sensor-related functions.
+ *
+ * Visit https://pros.cs.purdue.edu/v5/tutorials/topical/distance.html to learn
+ * more.
+ *
+ * This file should not be modified by users, since it gets replaced whenever
+ * a kernel upgrade occurs.
+ *
+ * \copyright (c) 2017-2021, Purdue University ACM SIGBots.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */ 1 1 17 4 18446744073709551615 1 # 19 1 19 2 18446744073709551615 6 ifndef 19 2 19 8 18446744073709551615 19 _PROS_DISTANCE_HPP_ 19 9 19 28 18446744073709551615 1 # 20 1 20 2 18446744073709551615 6 define 20 2 20 8 18446744073709551615 19 _PROS_DISTANCE_HPP_ 20 9 20 28 18446744073709551615 1 # 22 1 22 2 18446744073709551615 7 include 22 2 22 9 18446744073709551615 1 < 22 10 22 11 18446744073709551615 7 cstdint 22 11 22 18 18446744073709551615 1 > 22 18 22 19 18446744073709551615 1 # 24 1 24 2 18446744073709551615 7 include 24 2 24 9 18446744073709551615 17 "pros/distance.h" 24 10 24 27 18446744073709551615 9 namespace 26 1 26 10 18446744073709551615 4 pros 26 11 26 15 0 1 { 26 16 26 17 18446744073709551615 5 class 27 1 27 6 18446744073709551615 8 Distance 27 7 27 15 1 1 { 27 16 27 17 18446744073709551615 6 public 28 2 28 8 18446744073709551615 1 : 28 8 28 9 18446744073709551615 354 /**
+	 * Creates a Distance Sensor object for the given port.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as a Distance Sensor
+	 *
+	 * \param port
+	 *        The V5 port number from 1-21
+	 */ 29 2 39 5 18446744073709551615 8 explicit 40 2 40 10 18446744073709551615 8 Distance 40 11 40 19 1 1 ( 40 19 40 20 1 5 const 40 20 40 25 18446744073709551615 3 std 40 26 40 29 2 2 :: 40 29 40 31 18446744073709551615 7 uint8_t 40 31 40 38 3 4 port 40 39 40 43 3 1 ) 40 43 40 44 1 1 ; 40 44 40 45 18446744073709551615 391 /**
+	 * Get the currently measured distance from the sensor in mm
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Distance Sensor
+	 *
+	 * \return The distance value or PROS_ERR if the operation failed, setting
+	 * errno.
+	 */ 42 2 52 5 18446744073709551615 7 virtual 53 2 53 9 18446744073709551615 3 std 53 10 53 13 2 2 :: 53 13 53 15 4 7 int32_t 53 15 53 22 4 3 get 53 23 53 26 4 1 ( 53 26 53 27 4 1 ) 53 27 53 28 4 1 ; 53 28 53 29 18446744073709551615 556 /**
+	 * Get the confidence in the distance reading
+	 *
+	 * This is a value that has a range of 0 to 63. 63 means high confidence,
+	 * lower values imply less confidence. Confidence is only available
+	 * when distance is > 200mm.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Distance Sensor
+	 *
+	 * \return The confidence value or PROS_ERR if the operation failed, setting
+	 * errno.
+	 */ 55 2 69 5 18446744073709551615 7 virtual 70 2 70 9 18446744073709551615 3 std 70 10 70 13 2 2 :: 70 13 70 15 5 7 int32_t 70 15 70 22 5 14 get_confidence 70 23 70 37 5 1 ( 70 37 70 38 5 1 ) 70 38 70 39 5 1 ; 70 39 70 40 18446744073709551615 525 /**
+	 * Get the current guess at relative object size
+	 *
+	 * This is a value that has a range of 0 to 400.
+	 * A 18" x 30" grey card will return a value of approximately 75
+	 * in typical room lighting.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Distance Sensor
+	 *
+	 * \return The size value or PROS_ERR if the operation failed, setting
+	 * errno.
+	 */ 72 2 86 5 18446744073709551615 7 virtual 87 2 87 9 18446744073709551615 3 std 87 10 87 13 2 2 :: 87 13 87 15 6 7 int32_t 87 15 87 22 6 15 get_object_size 87 23 87 38 6 1 ( 87 38 87 39 6 1 ) 87 39 87 40 6 1 ; 87 40 87 41 18446744073709551615 364 /**
+	 * Get the object velocity in m/s
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Distance Sensor
+	 *
+	 * \return The velocity value or PROS_ERR if the operation failed, setting
+	 * errno.
+	 */ 89 2 99 5 18446744073709551615 7 virtual 100 2 100 9 18446744073709551615 6 double 100 10 100 16 18446744073709551615 19 get_object_velocity 100 17 100 36 7 1 ( 100 36 100 37 7 1 ) 100 37 100 38 7 1 ; 100 38 100 39 18446744073709551615 108 /**
+	 * Gets the port number of the distance sensor.
+	 *
+	 * \return The distance sensor's port number.
+	 */ 102 2 106 5 18446744073709551615 3 std 107 2 107 5 2 2 :: 107 5 107 7 8 7 uint8_t 107 7 107 14 8 8 get_port 107 15 107 23 8 1 ( 107 23 107 24 8 1 ) 107 24 107 25 8 1 ; 107 25 107 26 18446744073709551615 7 private 109 2 109 9 18446744073709551615 1 : 109 9 109 10 18446744073709551615 5 const 110 2 110 7 18446744073709551615 3 std 110 8 110 11 2 2 :: 110 11 110 13 18446744073709551615 7 uint8_t 110 13 110 20 9 5 _port 110 21 110 26 9 1 ; 110 26 110 27 18446744073709551615 1 } 111 1 111 2 18446744073709551615 1 ; 111 2 111 3 18446744073709551615 1 } 112 1 112 2 18446744073709551615 17 // namespace pros 112 4 112 21 18446744073709551615 1 # 114 1 114 2 18446744073709551615 5 endif 114 2 114 7 18446744073709551615 0 0 10 0 0 0 22 0 0 1 13 0 4 pros 4 1 13 0 13 Distance:pros 22 1 13 0 3 std 10 1 13 0 72 40:39:/home/bluecore/Desktop/Pros/Main Project/include/pros/distance.hpp 21 1 13 0 17 get:Distance:pros 21 1 13 0 28 get_confidence:Distance:pros 21 1 13 0 29 get_object_size:Distance:pros 21 1 13 0 33 get_object_velocity:Distance:pros 21 1 13 0 22 get_port:Distance:pros 6 1 13 0 19 _port:Distance:pros 0 0 1 0 0 0 66 /home/bluecore/Desktop/Pros/Main Project/include/pros/distance.hpp 1698321186

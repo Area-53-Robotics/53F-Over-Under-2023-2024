@@ -1,0 +1,197 @@
+22 serialization::archive 19 0 0 0 0 40 /home/bluecore/Desktop/Pros/Main Project 40 /home/bluecore/Desktop/Pros/Main Project 0 0 204 0 0 0 582 /**
+ * \file pros/optical.hpp
+ *
+ * Contains prototypes for functions related to the VEX Optical sensor.
+ *
+ * Visit https://pros.cs.purdue.edu/v5/tutorials/topical/imu.html to learn
+ * more.
+ *
+ * This file should not be modified by users, since it gets replaced whenever
+ * a kernel upgrade occurs.
+ *
+ * \copyright Copyright (c) 2017-2023, Purdue University ACM SIGBots.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */ 1 1 17 4 18446744073709551615 1 # 19 1 19 2 18446744073709551615 6 ifndef 19 2 19 8 18446744073709551615 18 _PROS_OPTICAL_HPP_ 19 9 19 27 18446744073709551615 1 # 20 1 20 2 18446744073709551615 6 define 20 2 20 8 18446744073709551615 18 _PROS_OPTICAL_HPP_ 20 9 20 27 18446744073709551615 1 # 22 1 22 2 18446744073709551615 7 include 22 2 22 9 18446744073709551615 1 < 22 10 22 11 18446744073709551615 7 stdbool 22 11 22 18 18446744073709551615 1 . 22 18 22 19 18446744073709551615 1 h 22 19 22 20 18446744073709551615 1 > 22 20 22 21 18446744073709551615 1 # 24 1 24 2 18446744073709551615 7 include 24 2 24 9 18446744073709551615 1 < 24 10 24 11 18446744073709551615 7 cstdint 24 11 24 18 18446744073709551615 1 > 24 18 24 19 18446744073709551615 1 # 26 1 26 2 18446744073709551615 7 include 26 2 26 9 18446744073709551615 16 "pros/optical.h" 26 10 26 26 18446744073709551615 9 namespace 28 1 28 10 18446744073709551615 4 pros 28 11 28 15 0 1 { 28 16 28 17 18446744073709551615 5 class 29 1 29 6 18446744073709551615 7 Optical 29 7 29 14 1 1 { 29 15 29 16 18446744073709551615 6 public 30 2 30 8 18446744073709551615 1 : 30 8 30 9 18446744073709551615 354 /**
+	 * Creates an Optical Sensor object for the given port.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+	 *
+	 * \param port
+	 *        The V5 port number from 1-21
+	 */ 31 2 41 5 18446744073709551615 8 explicit 42 2 42 10 18446744073709551615 7 Optical 42 11 42 18 1 1 ( 42 18 42 19 1 5 const 42 19 42 24 18446744073709551615 3 std 42 25 42 28 2 2 :: 42 28 42 30 18446744073709551615 7 uint8_t 42 30 42 37 3 4 port 42 38 42 42 3 1 ) 42 42 42 43 1 1 ; 42 43 42 44 18446744073709551615 8 explicit 44 2 44 10 18446744073709551615 7 Optical 44 11 44 18 1 1 ( 44 18 44 19 1 3 std 44 19 44 22 2 2 :: 44 22 44 24 18446744073709551615 7 uint8_t 44 24 44 31 4 4 port 44 32 44 36 4 1 , 44 36 44 37 1 6 double 44 38 44 44 18446744073709551615 4 time 44 45 44 49 5 1 ) 44 49 44 50 1 1 ; 44 50 44 51 18446744073709551615 482 /**
+	 * Get the detected color hue
+	 *
+	 * This is not available if gestures are being detected. Hue has a
+	 * range of 0 to 359.999
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+	 *
+	 * \return hue value if the operation was successful or PROS_ERR_F if the operation
+	 * failed, setting errno.
+	 */ 46 2 59 5 18446744073709551615 7 virtual 60 2 60 9 18446744073709551615 6 double 60 10 60 16 18446744073709551615 7 get_hue 60 17 60 24 6 1 ( 60 24 60 25 6 1 ) 60 25 60 26 6 1 ; 60 26 60 27 18446744073709551615 499 /**
+	 * Get the detected color saturation
+	 *
+	 * This is not available if gestures are being detected. Saturation has a
+	 * range of 0 to 1.0
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+	 *
+	 * \return saturation value if the operation was successful or PROS_ERR_F if
+	 * the operation failed, setting errno.
+	 */ 62 2 75 5 18446744073709551615 7 virtual 76 2 76 9 18446744073709551615 6 double 76 10 76 16 18446744073709551615 14 get_saturation 76 17 76 31 7 1 ( 76 31 76 32 7 1 ) 76 32 76 33 7 1 ; 76 33 76 34 18446744073709551615 499 /**
+	 * Get the detected color brightness
+	 *
+	 * This is not available if gestures are being detected. Brightness has a
+	 * range of 0 to 1.0
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+	 *
+	 * \return brightness value if the operation was successful or PROS_ERR_F if
+	 * the operation failed, setting errno.
+	 */ 78 2 91 5 18446744073709551615 7 virtual 92 2 92 9 18446744073709551615 6 double 92 10 92 16 18446744073709551615 14 get_brightness 92 17 92 31 8 1 ( 92 31 92 32 8 1 ) 92 32 92 33 8 1 ; 92 33 92 34 18446744073709551615 494 /**
+	 * Get the detected proximity value
+	 *
+	 * This is not available if gestures are being detected. proximity has
+	 * a range of 0 to 255.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+	 *
+	 * \return poximity value if the operation was successful or PROS_ERR if
+	 * the operation failed, setting errno.
+	 */ 94 2 107 5 18446744073709551615 7 virtual 108 2 108 9 18446744073709551615 3 std 108 10 108 13 2 2 :: 108 13 108 15 9 7 int32_t 108 15 108 22 9 13 get_proximity 108 23 108 36 9 1 ( 108 36 108 37 9 1 ) 108 37 108 38 9 1 ; 108 38 108 39 18446744073709551615 373 /**
+	 * Set the pwm value of the White LED on the sensor
+	 *
+	 * value that ranges from 0 to 100
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+	 *
+	 * \return The Error code encountered
+	 */ 110 2 121 5 18446744073709551615 7 virtual 122 2 122 9 18446744073709551615 3 std 122 10 122 13 2 2 :: 122 13 122 15 10 7 int32_t 122 15 122 22 10 11 set_led_pwm 122 23 122 34 10 1 ( 122 34 122 35 10 7 uint8_t 122 35 122 42 11 5 value 122 43 122 48 12 1 ) 122 48 122 49 10 1 ; 122 49 122 50 18446744073709551615 448 /**
+	 * Get the pwm value of the White LED on the sensor
+	 *
+	 * value that ranges from 0 to 100
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+	 *
+	 * \return LED pwm value if the operation was successful or PROS_ERR if
+	 * the operation failed, setting errno.
+	 */ 124 2 136 5 18446744073709551615 7 virtual 137 2 137 9 18446744073709551615 3 std 137 10 137 13 2 2 :: 137 13 137 15 13 7 int32_t 137 15 137 22 13 11 get_led_pwm 137 23 137 34 13 1 ( 137 34 137 35 13 1 ) 137 35 137 36 13 1 ; 137 36 137 37 18446744073709551615 442 /**
+	 * Get the processed RGBC data from the sensor
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+	 *
+	 * \return rgb value if the operation was successful or an optical_rgb_s_t 
+	 * with all fields set to PROS_ERR if the operation failed, setting errno.
+	 */ 139 2 149 5 18446744073709551615 7 virtual 150 2 150 9 18446744073709551615 4 pros 150 10 150 14 0 2 :: 150 14 150 16 14 1 c 150 16 150 17 15 2 :: 150 17 150 19 14 15 optical_rgb_s_t 150 19 150 34 16 7 get_rgb 150 35 150 42 14 1 ( 150 42 150 43 14 1 ) 150 43 150 44 14 1 ; 150 44 150 45 18446744073709551615 453 /**
+	 * Get the raw un-processed RGBC data from the sensor
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+	 *
+	 * \return raw rgb value if the operation was successful or an optical_raw_s_t 
+	 * with all fields set to PROS_ERR if the operation failed, setting errno.
+	 */ 152 2 162 5 18446744073709551615 7 virtual 163 2 163 9 18446744073709551615 4 pros 163 10 163 14 0 2 :: 163 14 163 16 17 1 c 163 16 163 17 15 2 :: 163 17 163 19 17 15 optical_raw_s_t 163 19 163 34 18 7 get_raw 163 35 163 42 17 1 ( 163 42 163 43 17 1 ) 163 43 163 44 17 1 ; 163 44 163 45 18446744073709551615 539 /**
+	 * Get the most recent gesture data from the sensor
+	 *
+	 * Gestures will be cleared after 500mS
+	 * 0 = no gesture
+	 * 1 = up (towards cable)
+	 * 2 = down
+	 * 3 = right
+	 * 4 = left
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+	 *
+	 * \return gesture value if the operation was successful or PROS_ERR if
+	 * the operation failed, setting errno.
+	 */ 165 2 182 5 18446744073709551615 7 virtual 183 2 183 9 18446744073709551615 4 pros 183 10 183 14 0 2 :: 183 14 183 16 19 1 c 183 16 183 17 15 2 :: 183 17 183 19 19 21 optical_direction_e_t 183 19 183 40 20 11 get_gesture 183 41 183 52 19 1 ( 183 52 183 53 19 1 ) 183 53 183 54 19 1 ; 183 54 183 55 18446744073709551615 459 /**
+	 * Get the most recent raw gesture data from the sensor
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+	 *
+	 * \return gesture value if the operation was successful or an optical_gesture_s_t 
+	 * with all fields set to PROS_ERR if the operation failed, setting errno.
+	 */ 185 2 195 5 18446744073709551615 7 virtual 196 2 196 9 18446744073709551615 4 pros 196 10 196 14 0 2 :: 196 14 196 16 21 1 c 196 16 196 17 15 2 :: 196 17 196 19 21 19 optical_gesture_s_t 196 19 196 38 22 15 get_gesture_raw 196 39 196 54 21 1 ( 196 54 196 55 21 1 ) 196 55 196 56 21 1 ; 196 56 196 57 18446744073709551615 386 /**
+	 * Enable gesture detection on the sensor
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+	 *
+	 * \return 1 if the operation is successful or PROS_ERR if the operation failed,
+ 	 * setting errno.
+	 */ 198 2 208 5 18446744073709551615 7 virtual 209 2 209 9 18446744073709551615 3 std 209 10 209 13 2 2 :: 209 13 209 15 23 7 int32_t 209 15 209 22 23 14 enable_gesture 209 23 209 37 23 1 ( 209 37 209 38 23 1 ) 209 38 209 39 23 1 ; 209 39 209 40 18446744073709551615 387 /**
+	 * Disable gesture detection on the sensor
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+	 *
+	 * \return 1 if the operation is successful or PROS_ERR if the operation failed,
+ 	 * setting errno.
+	 */ 211 2 221 5 18446744073709551615 7 virtual 222 2 222 9 18446744073709551615 3 std 222 10 222 13 2 2 :: 222 13 222 15 24 7 int32_t 222 15 222 22 24 15 disable_gesture 222 23 222 38 24 1 ( 222 38 222 39 24 1 ) 222 39 222 40 24 1 ; 222 40 222 41 18446744073709551615 581 /**
+	 * Set integration time (update rate) of the optical sensor in milliseconds, with
+	 * minimum time being 3 ms and maximum time being 712 ms. Default is 100 ms, with the 
+	 * optical sensor communciating with the V5 brain every 20 ms. 
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+ 	 *
+	 * \return 1 if the operation is successful or PROS_ERR_F if the operation failed,
+	 * setting errno.
+	 */ 224 2 236 5 18446744073709551615 6 double 237 2 237 8 18446744073709551615 20 get_integration_time 237 9 237 29 25 1 ( 237 29 237 30 25 1 ) 237 30 237 31 25 1 ; 237 31 237 32 18446744073709551615 525 /**
+	 * Get integration time (update rate) of the optical sensor in milliseconds.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as an Optical Sensor
+	 *
+	 * \param time
+	 *        The desired integration time in milliseconds
+	 * \return Integration time in milliseconds if the operation is successful 
+	 *  or PROS_ERR if the operation failed, setting errno.
+	 */ 239 2 251 5 18446744073709551615 3 std 252 2 252 5 2 2 :: 252 5 252 7 26 7 int32_t 252 7 252 14 26 20 set_integration_time 252 15 252 35 26 1 ( 252 35 252 36 26 6 double 252 36 252 42 18446744073709551615 4 time 252 43 252 47 27 1 ) 252 47 252 48 26 1 ; 252 48 252 49 18446744073709551615 106 /**
+	 * Gets the port number of the Optical Sensor.
+	 *
+	 * \return The Optical Sensor's port number.
+	 */ 254 2 258 5 18446744073709551615 7 virtual 259 2 259 9 18446744073709551615 3 std 259 10 259 13 2 2 :: 259 13 259 15 28 7 uint8_t 259 15 259 22 28 8 get_port 259 23 259 31 28 1 ( 259 31 259 32 28 1 ) 259 32 259 33 28 1 ; 259 33 259 34 18446744073709551615 7 private 261 2 261 9 18446744073709551615 1 : 261 9 261 10 18446744073709551615 5 const 262 2 262 7 18446744073709551615 3 std 262 8 262 11 2 2 :: 262 11 262 13 18446744073709551615 7 uint8_t 262 13 262 20 29 5 _port 262 21 262 26 29 1 ; 262 26 262 27 18446744073709551615 1 } 263 1 263 2 18446744073709551615 1 ; 263 2 263 3 18446744073709551615 1 } 264 1 264 2 18446744073709551615 17 // namespace pros 264 4 264 21 18446744073709551615 1 # 266 1 266 2 18446744073709551615 5 endif 266 2 266 7 18446744073709551615 0 0 30 0 0 0 22 0 0 1 13 0 4 pros 4 1 13 0 12 Optical:pros 22 1 13 0 3 std 10 1 13 0 71 42:38:/home/bluecore/Desktop/Pros/Main Project/include/pros/optical.hpp 10 1 13 0 71 44:32:/home/bluecore/Desktop/Pros/Main Project/include/pros/optical.hpp 10 1 13 0 71 44:45:/home/bluecore/Desktop/Pros/Main Project/include/pros/optical.hpp 21 1 13 0 20 get_hue:Optical:pros 21 1 13 0 27 get_saturation:Optical:pros 21 1 13 0 27 get_brightness:Optical:pros 21 1 13 0 26 get_proximity:Optical:pros 21 1 13 0 24 set_led_pwm:Optical:pros 20 1 13 0 7 uint8_t 10 1 13 0 72 122:43:/home/bluecore/Desktop/Pros/Main Project/include/pros/optical.hpp 21 1 13 0 24 get_led_pwm:Optical:pros 21 1 13 0 20 get_rgb:Optical:pros 22 1 13 0 6 c:pros 20 1 13 0 22 optical_rgb_s_t:c:pros 21 1 13 0 20 get_raw:Optical:pros 20 1 13 0 22 optical_raw_s_t:c:pros 21 1 13 0 24 get_gesture:Optical:pros 20 1 13 0 28 optical_direction_e_t:c:pros 21 1 13 0 28 get_gesture_raw:Optical:pros 20 1 13 0 26 optical_gesture_s_t:c:pros 21 1 13 0 27 enable_gesture:Optical:pros 21 1 13 0 28 disable_gesture:Optical:pros 21 1 13 0 33 get_integration_time:Optical:pros 21 1 13 0 33 set_integration_time:Optical:pros 10 1 13 0 72 252:43:/home/bluecore/Desktop/Pros/Main Project/include/pros/optical.hpp 21 1 13 0 21 get_port:Optical:pros 6 1 13 0 18 _port:Optical:pros 0 0 1 0 0 0 65 /home/bluecore/Desktop/Pros/Main Project/include/pros/optical.hpp 1698321180

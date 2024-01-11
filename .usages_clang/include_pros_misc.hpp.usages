@@ -1,0 +1,235 @@
+22 serialization::archive 19 0 0 0 0 40 /home/bluecore/Desktop/Pros/Main Project 40 /home/bluecore/Desktop/Pros/Main Project 0 0 375 0 0 0 658 /**
+ * \file pros/misc.hpp
+ *
+ * Contains prototypes for miscellaneous functions pertaining to the controller,
+ * battery, and competition control.
+ *
+ * Visit https://pros.cs.purdue.edu/v5/tutorials/topical/controller.html to
+ * learn more.
+ *
+ * This file should not be modified by users, since it gets replaced whenever
+ * a kernel upgrade occurs.
+ *
+ * \copyright Copyright (c) 2017-2023, Purdue University ACM SIGBots.
+ * All rights reservered.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */ 1 1 19 4 18446744073709551615 1 # 21 1 21 2 18446744073709551615 6 ifndef 21 2 21 8 18446744073709551615 15 _PROS_MISC_HPP_ 21 9 21 24 18446744073709551615 1 # 22 1 22 2 18446744073709551615 6 define 22 2 22 8 18446744073709551615 15 _PROS_MISC_HPP_ 22 9 22 24 18446744073709551615 1 # 24 1 24 2 18446744073709551615 7 include 24 2 24 9 18446744073709551615 13 "pros/misc.h" 24 10 24 23 18446744073709551615 1 # 26 1 26 2 18446744073709551615 7 include 26 2 26 9 18446744073709551615 1 < 26 10 26 11 18446744073709551615 7 cstdint 26 11 26 18 18446744073709551615 1 > 26 18 26 19 18446744073709551615 1 # 27 1 27 2 18446744073709551615 7 include 27 2 27 9 18446744073709551615 1 < 27 10 27 11 18446744073709551615 6 string 27 11 27 17 18446744073709551615 1 > 27 17 27 18 18446744073709551615 9 namespace 29 1 29 10 18446744073709551615 4 pros 29 11 29 15 0 1 { 29 16 29 17 18446744073709551615 5 class 30 1 30 6 18446744073709551615 10 Controller 30 7 30 17 1 1 { 30 18 30 19 18446744073709551615 6 public 31 2 31 8 18446744073709551615 1 : 31 8 31 9 18446744073709551615 226 /**
+	 * Creates a controller object for the given controller id.
+	 *
+	 * \param id
+	 * 			  The ID of the controller (e.g. the master or partner controller).
+	 * 			  Must be one of CONTROLLER_MASTER or CONTROLLER_PARTNER
+	 */ 32 2 38 5 18446744073709551615 10 Controller 39 2 39 12 1 1 ( 39 12 39 13 1 17 controller_id_e_t 39 13 39 30 2 2 id 39 31 39 33 3 1 ) 39 33 39 34 1 1 ; 39 34 39 35 18446744073709551615 291 /**
+	 * Checks if the controller is connected.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * EACCES - Another resource is currently trying to access the controller
+	 * port.
+	 *
+	 * \return 1 if the controller is connected, 0 otherwise
+	 */ 41 2 50 5 18446744073709551615 3 std 51 2 51 5 4 2 :: 51 5 51 7 5 7 int32_t 51 7 51 14 5 12 is_connected 51 15 51 27 5 1 ( 51 27 51 28 5 4 void 51 28 51 32 18446744073709551615 1 ) 51 32 51 33 5 1 ; 51 33 51 34 18446744073709551615 541 /**
+	 * Gets the value of an analog channel (joystick) on a controller.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * EACCES - Another resource is currently trying to access the controller
+	 * port.
+	 *
+	 * \param channel
+	 * 			  The analog channel to get.
+	 * 			  Must be one of ANALOG_LEFT_X, ANALOG_LEFT_Y, ANALOG_RIGHT_X,
+	 *        ANALOG_RIGHT_Y
+	 *
+	 * \return The current reading of the analog channel: [-127, 127].
+	 * If the controller was not connected, then 0 is returned
+	 */ 53 2 68 5 18446744073709551615 3 std 69 2 69 5 4 2 :: 69 5 69 7 6 7 int32_t 69 7 69 14 6 10 get_analog 69 15 69 25 6 1 ( 69 25 69 26 6 21 controller_analog_e_t 69 26 69 47 7 7 channel 69 48 69 55 8 1 ) 69 55 69 56 6 1 ; 69 56 69 57 18446744073709551615 285 /**
+	 * Gets the battery capacity of the controller.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * EACCES - Another resource is currently trying to access the controller
+	 * port.
+	 *
+	 * \return The controller's battery capacity
+	 */ 71 2 80 5 18446744073709551615 3 std 81 2 81 5 4 2 :: 81 5 81 7 9 7 int32_t 81 7 81 14 9 20 get_battery_capacity 81 15 81 35 9 1 ( 81 35 81 36 9 4 void 81 36 81 40 18446744073709551615 1 ) 81 40 81 41 9 1 ; 81 41 81 42 18446744073709551615 279 /**
+	 * Gets the battery level of the controller.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * EACCES - Another resource is currently trying to access the controller
+	 * port.
+	 *
+	 * \return The controller's battery level
+	 */ 83 2 92 5 18446744073709551615 3 std 93 2 93 5 4 2 :: 93 5 93 7 10 7 int32_t 93 7 93 14 10 17 get_battery_level 93 15 93 32 10 1 ( 93 32 93 33 10 4 void 93 33 93 37 18446744073709551615 1 ) 93 37 93 38 10 1 ; 93 38 93 39 18446744073709551615 519 /**
+	 * Checks if a digital channel (button) on the controller is currently
+	 * pressed.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * EACCES - Another resource is currently trying to access the controller
+	 * port.
+	 *
+	 * \param button
+	 * 			  The button to read. Must be one of
+	 *        DIGITAL_{RIGHT,DOWN,LEFT,UP,A,B,Y,X,R1,R2,L1,L2}
+	 *
+	 * \return 1 if the button on the controller is pressed.
+	 * If the controller was not connected, then 0 is returned
+	 */ 95 2 110 5 18446744073709551615 3 std 111 2 111 5 4 2 :: 111 5 111 7 11 7 int32_t 111 7 111 14 11 11 get_digital 111 15 111 26 11 1 ( 111 26 111 27 11 22 controller_digital_e_t 111 27 111 49 12 6 button 111 50 111 56 13 1 ) 111 56 111 57 11 1 ; 111 57 111 58 18446744073709551615 1002 /**
+	 * Returns a rising-edge case for a controller button press.
+	 *
+	 * This function is not thread-safe.
+	 * Multiple tasks polling a single button may return different results under
+	 * the same circumstances, so only one task should call this function for any
+	 * given button. E.g., Task A calls this function for buttons 1 and 2.
+	 * Task B may call this function for button 3, but should not for buttons
+	 * 1 or 2. A typical use-case for this function is to call inside opcontrol
+	 * to detect new button presses, and not in any other tasks.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * EACCES - Another resource is currently trying to access the controller
+	 * port.
+	 *
+	 * \param button
+	 * 			  The button to read. Must be one of
+	 *        DIGITAL_{RIGHT,DOWN,LEFT,UP,A,B,Y,X,R1,R2,L1,L2}
+	 *
+	 * \return 1 if the button on the controller is pressed and had not been
+	 * pressed the last time this function was called, 0 otherwise.
+	 */ 113 2 135 5 18446744073709551615 3 std 136 2 136 5 4 2 :: 136 5 136 7 14 7 int32_t 136 7 136 14 14 21 get_digital_new_press 136 15 136 36 14 1 ( 136 36 136 37 14 22 controller_digital_e_t 136 37 136 59 12 6 button 136 60 136 66 15 1 ) 136 66 136 67 14 1 ; 136 67 136 68 18446744073709551615 1 # 138 1 138 2 18446744073709551615 6 pragma 138 2 138 8 18446744073709551615 3 GCC 138 9 138 12 18446744073709551615 10 diagnostic 138 13 138 23 18446744073709551615 4 push 138 24 138 28 18446744073709551615 1 # 139 1 139 2 18446744073709551615 6 pragma 139 2 139 8 18446744073709551615 3 GCC 139 9 139 12 18446744073709551615 10 diagnostic 139 13 139 23 18446744073709551615 7 ignored 139 24 139 31 18446744073709551615 19 "-Wunused-function" 139 32 139 51 18446744073709551615 8 template 140 2 140 10 18446744073709551615 1 < 140 11 140 12 18446744073709551615 8 typename 140 12 140 20 18446744073709551615 1 T 140 21 140 22 16 1 > 140 22 140 23 18446744073709551615 1 T 141 2 141 3 16 12 convert_args 141 4 141 16 17 1 ( 141 16 141 17 18446744073709551615 1 T 141 17 141 18 16 3 arg 141 19 141 22 18 1 ) 141 22 141 23 18446744073709551615 1 { 141 24 141 25 18446744073709551615 6 return 142 3 142 9 18446744073709551615 3 arg 142 10 142 13 18 1 ; 142 13 142 14 18446744073709551615 1 } 143 2 143 3 18446744073709551615 5 const 144 2 144 7 18446744073709551615 4 char 144 8 144 12 18446744073709551615 1 * 144 12 144 13 17 12 convert_args 144 14 144 26 17 1 ( 144 26 144 27 17 5 const 144 27 144 32 18446744073709551615 3 std 144 33 144 36 4 2 :: 144 36 144 38 18446744073709551615 6 string 144 38 144 44 19 1 & 144 44 144 45 18446744073709551615 3 arg 144 46 144 49 20 1 ) 144 49 144 50 17 1 { 144 51 144 52 18446744073709551615 6 return 145 3 145 9 18446744073709551615 3 arg 145 10 145 13 20 1 . 145 13 145 14 21 5 c_str 145 14 145 19 21 1 ( 145 19 145 20 21 1 ) 145 20 145 21 21 1 ; 145 21 145 22 18446744073709551615 1 } 146 2 146 3 18446744073709551615 1 # 147 1 147 2 18446744073709551615 6 pragma 147 2 147 8 18446744073709551615 3 GCC 147 9 147 12 18446744073709551615 10 diagnostic 147 13 147 23 18446744073709551615 3 pop 147 24 147 27 18446744073709551615 761 /**
+	 * Sets text to the controller LCD screen.
+	 *
+	 * \note Controller text setting is currently in beta, so continuous, fast
+	 * updates will not work well.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * EACCES - Another resource is currently trying to access the controller
+	 * port.
+	 *
+	 * \param line
+	 *        The line number at which the text will be displayed [0-2]
+	 * \param col
+	 *        The column number at which the text will be displayed [0-14]
+	 * \param fmt
+	 *        The format string to print to the controller
+	 * \param ...
+	 *        The argument list for the format string
+	 *
+	 * \return 1 if the operation was successful or PROS_ERR if the operation
+	 * failed, setting errno.
+	 */ 149 2 171 5 18446744073709551615 8 template 172 2 172 10 18446744073709551615 1 < 172 11 172 12 18446744073709551615 8 typename 172 12 172 20 18446744073709551615 3 ... 172 20 172 23 18446744073709551615 6 Params 172 24 172 30 22 1 > 172 30 172 31 18446744073709551615 3 std 173 2 173 5 4 2 :: 173 5 173 7 18446744073709551615 7 int32_t 173 7 173 14 23 5 print 173 15 173 20 23 1 ( 173 20 173 21 18446744073709551615 3 std 173 21 173 24 4 2 :: 173 24 173 26 18446744073709551615 7 uint8_t 173 26 173 33 24 4 line 173 34 173 38 24 1 , 173 38 173 39 18446744073709551615 3 std 173 40 173 43 4 2 :: 173 43 173 45 18446744073709551615 7 uint8_t 173 45 173 52 25 3 col 173 53 173 56 25 1 , 173 56 173 57 18446744073709551615 5 const 173 58 173 63 18446744073709551615 4 char 173 64 173 68 18446744073709551615 1 * 173 68 173 69 18446744073709551615 3 fmt 173 70 173 73 26 1 , 173 73 173 74 18446744073709551615 6 Params 173 75 173 81 22 3 ... 173 81 173 84 18446744073709551615 4 args 173 85 173 89 27 1 ) 173 89 173 90 18446744073709551615 1 { 173 91 173 92 18446744073709551615 6 return 174 3 174 9 18446744073709551615 4 pros 174 10 174 14 0 2 :: 174 14 174 16 28 1 c 174 16 174 17 29 2 :: 174 17 174 19 28 16 controller_print 174 19 174 35 28 1 ( 174 35 174 36 28 3 _id 174 36 174 39 30 1 , 174 39 174 40 28 4 line 174 41 174 45 24 1 , 174 45 174 46 28 3 col 174 47 174 50 25 1 , 174 50 174 51 28 3 fmt 174 52 174 55 26 1 , 174 55 174 56 28 12 convert_args 174 57 174 69 31 1 ( 174 69 174 70 18446744073709551615 4 args 174 70 174 74 27 1 ) 174 74 174 75 18446744073709551615 3 ... 174 75 174 78 18446744073709551615 1 ) 174 78 174 79 28 1 ; 174 79 174 80 18446744073709551615 1 } 175 2 175 3 18446744073709551615 702 /**
+	 * Sets text to the controller LCD screen.
+	 *
+	 * \note Controller text setting is currently in beta, so continuous, fast
+	 * updates will not work well.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * EACCES - Another resource is currently trying to access the controller
+	 * port.
+	 *
+	 * \param line
+	 *        The line number at which the text will be displayed [0-2]
+	 * \param col
+	 *        The column number at which the text will be displayed [0-14]
+	 * \param str
+	 *        The pre-formatted string to print to the controller
+	 *
+	 * \return 1 if the operation was successful or PROS_ERR if the operation
+	 * failed, setting errno.
+	 */ 177 2 197 5 18446744073709551615 3 std 198 2 198 5 4 2 :: 198 5 198 7 32 7 int32_t 198 7 198 14 32 8 set_text 198 15 198 23 32 1 ( 198 23 198 24 32 3 std 198 24 198 27 4 2 :: 198 27 198 29 18446744073709551615 7 uint8_t 198 29 198 36 33 4 line 198 37 198 41 33 1 , 198 41 198 42 32 3 std 198 43 198 46 4 2 :: 198 46 198 48 18446744073709551615 7 uint8_t 198 48 198 55 34 3 col 198 56 198 59 34 1 , 198 59 198 60 32 5 const 198 61 198 66 18446744073709551615 4 char 198 67 198 71 18446744073709551615 1 * 198 71 198 72 18446744073709551615 3 str 198 73 198 76 35 1 ) 198 76 198 77 32 1 ; 198 77 198 78 18446744073709551615 3 std 199 2 199 5 4 2 :: 199 5 199 7 32 7 int32_t 199 7 199 14 32 8 set_text 199 15 199 23 32 1 ( 199 23 199 24 32 3 std 199 24 199 27 4 2 :: 199 27 199 29 18446744073709551615 7 uint8_t 199 29 199 36 36 4 line 199 37 199 41 36 1 , 199 41 199 42 32 3 std 199 43 199 46 4 2 :: 199 46 199 48 18446744073709551615 7 uint8_t 199 48 199 55 37 3 col 199 56 199 59 37 1 , 199 59 199 60 32 5 const 199 61 199 66 18446744073709551615 3 std 199 67 199 70 4 2 :: 199 70 199 72 18446744073709551615 6 string 199 72 199 78 19 1 & 199 78 199 79 18446744073709551615 3 str 199 80 199 83 38 1 ) 199 83 199 84 32 1 ; 199 84 199 85 18446744073709551615 522 /**
+	 * Clears an individual line of the controller screen.
+	 *
+	 * \note Controller text setting is currently in beta, so continuous, fast
+	 * updates will not work well.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * EACCES - Another resource is currently trying to access the controller
+	 * port.
+	 *
+	 * \param line
+	 *        The line number to clear [0-2]
+	 *
+	 * \return 1 if the operation was successful or PROS_ERR if the operation
+	 * failed, setting errno.
+	 */ 201 2 217 5 18446744073709551615 3 std 218 2 218 5 4 2 :: 218 5 218 7 39 7 int32_t 218 7 218 14 39 10 clear_line 218 15 218 25 39 1 ( 218 25 218 26 39 3 std 218 26 218 29 4 2 :: 218 29 218 31 18446744073709551615 7 uint8_t 218 31 218 38 40 4 line 218 39 218 43 40 1 ) 218 43 218 44 39 1 ; 218 44 218 45 18446744073709551615 664 /**
+	 * Rumble the controller.
+	 *
+	 * \note Controller rumble activation is currently in beta, so continuous, fast
+	 * updates will not work well.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * EACCES - Another resource is currently trying to access the controller
+	 * port.
+	 *
+	 * \param rumble_pattern
+	 *				A string consisting of the characters '.', '-', and ' ', where dots
+	 *				are short rumbles, dashes are long rumbles, and spaces are pauses.
+	 *				Maximum supported length is 8 characters.
+	 *
+	 * \return 1 if the operation was successful or PROS_ERR if the operation
+	 * failed, setting errno.
+	 */ 220 2 238 5 18446744073709551615 3 std 239 2 239 5 4 2 :: 239 5 239 7 41 7 int32_t 239 7 239 14 41 6 rumble 239 15 239 21 41 1 ( 239 21 239 22 41 5 const 239 22 239 27 18446744073709551615 4 char 239 28 239 32 18446744073709551615 1 * 239 32 239 33 18446744073709551615 14 rumble_pattern 239 34 239 48 42 1 ) 239 48 239 49 41 1 ; 239 49 239 50 18446744073709551615 521 /**
+	 * Clears all of the lines on the controller screen.
+	 *
+	 * \note Controller text setting is currently in beta, so continuous, fast
+	 * updates will not work well. On vexOS version 1.0.0 this function will
+	 * block for 110ms.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * EACCES - Another resource is currently trying to access the controller
+	 * port.
+	 *
+	 * \return 1 if the operation was successful or PROS_ERR if the operation
+	 * failed, setting errno.
+	 */ 241 2 255 5 18446744073709551615 3 std 256 2 256 5 4 2 :: 256 5 256 7 43 7 int32_t 256 7 256 14 43 5 clear 256 15 256 20 43 1 ( 256 20 256 21 43 4 void 256 21 256 25 18446744073709551615 1 ) 256 25 256 26 43 1 ; 256 26 256 27 18446744073709551615 7 private 258 2 258 9 18446744073709551615 1 : 258 9 258 10 18446744073709551615 17 controller_id_e_t 259 2 259 19 2 3 _id 259 20 259 23 30 1 ; 259 23 259 24 18446744073709551615 1 } 260 1 260 2 18446744073709551615 1 ; 260 2 260 3 18446744073709551615 9 namespace 262 1 262 10 18446744073709551615 7 battery 262 11 262 18 44 1 { 262 19 262 20 18446744073709551615 289 /**
+ * Gets the current voltage of the battery, as reported by VEXos.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * EACCES - Another resource is currently trying to access the battery port.
+ *
+ * \return The current voltage of the battery
+ */ 263 1 271 4 18446744073709551615 6 double 272 1 272 7 18446744073709551615 12 get_capacity 272 8 272 20 45 1 ( 272 20 272 21 45 4 void 272 21 272 25 18446744073709551615 1 ) 272 25 272 26 45 1 ; 272 26 272 27 18446744073709551615 302 /**
+ * Gets the current current of the battery in milliamps, as reported by VEXos.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * EACCES - Another resource is currently trying to access the battery port.
+ *
+ * \return The current current of the battery
+ */ 274 1 282 4 18446744073709551615 7 int32_t 283 1 283 8 46 11 get_current 283 9 283 20 47 1 ( 283 20 283 21 47 4 void 283 21 283 25 18446744073709551615 1 ) 283 25 283 26 47 1 ; 283 26 283 27 18446744073709551615 297 /**
+ * Gets the current temperature of the battery, as reported by VEXos.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * EACCES - Another resource is currently trying to access the battery port.
+ *
+ * \return The current temperature of the battery
+ */ 285 1 293 4 18446744073709551615 6 double 294 1 294 7 18446744073709551615 15 get_temperature 294 8 294 23 48 1 ( 294 23 294 24 48 4 void 294 24 294 28 18446744073709551615 1 ) 294 28 294 29 48 1 ; 294 29 294 30 18446744073709551615 305 /**
+ * Gets the current capacity of the battery in millivolts, as reported by VEXos.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * EACCES - Another resource is currently trying to access the battery port.
+ *
+ * \return The current capacity of the battery
+ */ 296 1 304 4 18446744073709551615 7 int32_t 305 1 305 8 46 11 get_voltage 305 9 305 20 49 1 ( 305 20 305 21 49 4 void 305 21 305 25 18446744073709551615 1 ) 305 25 305 26 49 1 ; 305 26 305 27 18446744073709551615 1 } 306 1 306 2 18446744073709551615 20 // namespace battery 306 4 306 24 18446744073709551615 9 namespace 308 1 308 10 18446744073709551615 11 competition 308 11 308 22 50 1 { 308 23 308 24 18446744073709551615 176 /**
+ * Get the current status of the competition control.
+ *
+ * \return The competition control status as a mask of bits with
+ * COMPETITION_{ENABLED,AUTONOMOUS,CONNECTED}.
+ */ 309 1 314 4 18446744073709551615 3 std 315 1 315 4 4 2 :: 315 4 315 6 51 7 uint8_t 315 6 315 13 51 10 get_status 315 14 315 24 51 1 ( 315 24 315 25 51 4 void 315 25 315 29 18446744073709551615 1 ) 315 29 315 30 51 1 ; 315 30 315 31 18446744073709551615 3 std 316 1 316 4 4 2 :: 316 4 316 6 52 7 uint8_t 316 6 316 13 52 13 is_autonomous 316 14 316 27 52 1 ( 316 27 316 28 52 4 void 316 28 316 32 18446744073709551615 1 ) 316 32 316 33 52 1 ; 316 33 316 34 18446744073709551615 3 std 317 1 317 4 4 2 :: 317 4 317 6 53 7 uint8_t 317 6 317 13 53 12 is_connected 317 14 317 26 53 1 ( 317 26 317 27 53 4 void 317 27 317 31 18446744073709551615 1 ) 317 31 317 32 53 1 ; 317 32 317 33 18446744073709551615 3 std 318 1 318 4 4 2 :: 318 4 318 6 54 7 uint8_t 318 6 318 13 54 11 is_disabled 318 14 318 25 54 1 ( 318 25 318 26 54 4 void 318 26 318 30 18446744073709551615 1 ) 318 30 318 31 54 1 ; 318 31 318 32 18446744073709551615 1 } 319 1 319 2 18446744073709551615 24 // namespace competition 319 4 319 28 18446744073709551615 9 namespace 321 1 321 10 18446744073709551615 3 usd 321 11 321 14 55 1 { 321 15 321 16 18446744073709551615 103 /**
+ * Checks if the SD card is installed.
+ *
+ * \return 1 if the SD card is installed, 0 otherwise
+ */ 322 1 326 4 18446744073709551615 3 std 327 1 327 4 4 2 :: 327 4 327 6 56 7 int32_t 327 6 327 13 56 12 is_installed 327 14 327 26 56 1 ( 327 26 327 27 56 4 void 327 27 327 31 18446744073709551615 1 ) 327 31 327 32 56 1 ; 327 32 327 33 18446744073709551615 1 } 328 1 328 2 18446744073709551615 16 // namespace usd 328 4 328 20 18446744073709551615 1 } 329 1 329 2 18446744073709551615 17 // namespace pros 329 4 329 21 18446744073709551615 1 # 331 1 331 2 18446744073709551615 5 endif 331 2 331 7 18446744073709551615 18 // _PROS_MISC_HPP_ 331 9 331 27 18446744073709551615 0 0 57 0 0 0 22 0 0 1 13 0 4 pros 4 1 13 0 15 Controller:pros 20 1 13 0 22 controller_id_e_t:pros 10 1 13 0 68 39:31:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 22 1 13 0 3 std 21 1 13 0 28 is_connected:Controller:pros 21 1 13 0 26 get_analog:Controller:pros 20 1 13 0 26 controller_analog_e_t:pros 10 1 13 0 68 69:48:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 21 1 13 0 36 get_battery_capacity:Controller:pros 21 1 13 0 33 get_battery_level:Controller:pros 21 1 13 0 27 get_digital:Controller:pros 20 1 13 0 27 controller_digital_e_t:pros 10 1 13 0 69 111:50:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 21 1 13 0 37 get_digital_new_press:Controller:pros 10 1 13 0 69 136:60:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 27 1 13 0 69 140:21:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 30 1 13 0 28 convert_args:Controller:pros 10 1 13 0 69 141:19:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 20 1 13 0 10 string:std 10 1 13 0 69 144:46:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 21 1 13 0 30 c_str:basic_string:__cxx11:std 27 1 13 0 69 172:24:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 30 1 13 0 21 print:Controller:pros 10 1 13 0 69 173:34:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 10 1 13 0 69 173:53:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 10 1 13 0 69 173:70:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 10 1 13 0 69 173:85:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 8 1 13 0 23 controller_print:c:pros 22 1 13 0 6 c:pros 6 1 13 0 19 _id:Controller:pros 49 1 13 0 12 convert_args 21 1 13 0 24 set_text:Controller:pros 10 1 13 0 69 198:37:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 10 1 13 0 69 198:56:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 10 1 13 0 69 198:73:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 10 1 13 0 69 199:37:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 10 1 13 0 69 199:56:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 10 1 13 0 69 199:80:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 21 1 13 0 26 clear_line:Controller:pros 10 1 13 0 69 218:39:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 21 1 13 0 22 rumble:Controller:pros 10 1 13 0 69 239:34:/home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 21 1 13 0 21 clear:Controller:pros 22 1 13 0 12 battery:pros 8 1 13 0 25 get_capacity:battery:pros 20 1 13 0 7 int32_t 8 1 13 0 24 get_current:battery:pros 8 1 13 0 28 get_temperature:battery:pros 8 1 13 0 24 get_voltage:battery:pros 22 1 13 0 16 competition:pros 8 1 13 0 27 get_status:competition:pros 8 1 13 0 30 is_autonomous:competition:pros 8 1 13 0 29 is_connected:competition:pros 8 1 13 0 28 is_disabled:competition:pros 22 1 13 0 8 usd:pros 8 1 13 0 21 is_installed:usd:pros 0 0 1 0 0 0 62 /home/bluecore/Desktop/Pros/Main Project/include/pros/misc.hpp 1698321192

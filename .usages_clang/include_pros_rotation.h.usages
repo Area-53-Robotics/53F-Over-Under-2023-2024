@@ -1,0 +1,168 @@
+22 serialization::archive 19 0 0 0 0 40 /home/bluecore/Desktop/Pros/Main Project 40 /home/bluecore/Desktop/Pros/Main Project 0 0 152 0 0 0 587 /**
+ * \file pros/rotation.h
+ *
+ * Contains prototypes for functions related to the VEX Rotation Sensor.
+ *
+ * Visit https://pros.cs.purdue.edu/v5/tutorials/topical/rotation.html to learn
+ * more.
+ *
+ * This file should not be modified by users, since it gets replaced whenever
+ * a kernel upgrade occurs.
+ *
+ * \copyright Copyright (c) 2017-2023, Purdue University ACM SIGBots.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */ 1 1 17 4 18446744073709551615 1 # 19 1 19 2 18446744073709551615 6 ifndef 19 2 19 8 18446744073709551615 17 _PROS_ROTATION_H_ 19 9 19 26 18446744073709551615 1 # 20 1 20 2 18446744073709551615 6 define 20 2 20 8 18446744073709551615 17 _PROS_ROTATION_H_ 20 9 20 26 18446744073709551615 1 # 22 1 22 2 18446744073709551615 7 include 22 2 22 9 18446744073709551615 1 < 22 10 22 11 18446744073709551615 7 stdbool 22 11 22 18 18446744073709551615 1 . 22 18 22 19 18446744073709551615 1 h 22 19 22 20 18446744073709551615 1 > 22 20 22 21 18446744073709551615 1 # 23 1 23 2 18446744073709551615 7 include 23 2 23 9 18446744073709551615 1 < 23 10 23 11 18446744073709551615 6 stdint 23 11 23 17 18446744073709551615 1 . 23 17 23 18 18446744073709551615 1 h 23 18 23 19 18446744073709551615 1 > 23 19 23 20 18446744073709551615 1 # 25 1 25 2 18446744073709551615 5 ifdef 25 2 25 7 18446744073709551615 11 __cplusplus 25 8 25 19 18446744073709551615 6 extern 26 1 26 7 18446744073709551615 3 "C" 26 8 26 11 18446744073709551615 1 { 26 12 26 13 18446744073709551615 9 namespace 27 1 27 10 18446744073709551615 4 pros 27 11 27 15 0 1 { 27 16 27 17 18446744073709551615 9 namespace 28 1 28 10 18446744073709551615 1 c 28 11 28 12 1 1 { 28 13 28 14 18446744073709551615 1 # 29 1 29 2 18446744073709551615 5 endif 29 2 29 7 18446744073709551615 1 # 31 1 31 2 18446744073709551615 6 define 31 2 31 8 18446744073709551615 26 ROTATION_MINIMUM_DATA_RATE 31 9 31 35 18446744073709551615 1 5 31 36 31 37 18446744073709551615 521 /**
+ * Reset Rotation Sensor 
+ *
+ * Reset the current absolute position to be the same as the
+ * Rotation Sensor angle.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Rotation Sensor
+ *
+ * \param port
+ *        The V5 Rotation Sensor port number from 1-21
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 33 1 48 4 18446744073709551615 7 int32_t 49 1 49 8 2 14 rotation_reset 49 9 49 23 3 1 ( 49 23 49 24 3 7 uint8_t 49 24 49 31 4 4 port 49 32 49 36 5 1 ) 49 36 49 37 3 1 ; 49 37 49 38 18446744073709551615 705 /**
+ * Set the Rotation Sensor's refresh interval in milliseconds.
+ *
+ * The rate may be specified in increments of 5ms, and will be rounded down to
+ * the nearest increment. The minimum allowable refresh rate is 5ms. The default
+ * rate is 10ms.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Rotation Sensor
+ *
+ * \param port
+ *        The V5 Rotation Sensor port number from 1-21
+ * \param rate The data refresh interval in milliseconds
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 51 1 68 4 18446744073709551615 7 int32_t 69 1 69 8 2 22 rotation_set_data_rate 69 9 69 31 6 1 ( 69 31 69 32 6 7 uint8_t 69 32 69 39 4 4 port 69 40 69 44 7 1 , 69 44 69 45 6 8 uint32_t 69 46 69 54 8 4 rate 69 55 69 59 9 1 ) 69 59 69 60 6 1 ; 69 60 69 61 18446744073709551615 531 /**
+ * Set the Rotation Sensor position reading to a desired rotation value
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Rotation Sensor
+ *
+ * \param port
+ *		  The V5 Rotation Sensor port number from 1-21
+ * \param position 
+ * 		  The position in terms of ticks
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 71 1 85 4 18446744073709551615 7 int32_t 86 1 86 8 2 21 rotation_set_position 86 9 86 30 10 1 ( 86 30 86 31 10 7 uint8_t 86 31 86 38 4 4 port 86 39 86 43 11 1 , 86 43 86 44 10 8 uint32_t 86 45 86 53 8 8 position 86 54 86 62 12 1 ) 86 62 86 63 10 1 ; 86 63 86 64 18446744073709551615 445 /**
+ * Reset the Rotation Sensor position to 0
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Rotation Sensor
+ *
+ * \param port
+ *		  The V5 Rotation Sensor port number from 1-21
+
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 88 1 101 4 18446744073709551615 7 int32_t 102 1 102 8 2 23 rotation_reset_position 102 9 102 32 13 1 ( 102 32 102 33 13 7 uint8_t 102 33 102 40 4 4 port 102 41 102 45 14 1 ) 102 45 102 46 13 1 ; 102 46 102 47 18446744073709551615 453 /**
+ * Get the Rotation Sensor's current position in centidegrees
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Rotation Sensor
+ *
+ * \param  port
+ * 				 The V5 Rotation Sensor port number from 1-21
+ * \return The position value or PROS_ERR_F if the operation failed, setting
+ * errno.
+ */ 104 1 116 4 18446744073709551615 7 int32_t 117 1 117 8 2 21 rotation_get_position 117 9 117 30 15 1 ( 117 30 117 31 15 7 uint8_t 117 31 117 38 4 4 port 117 39 117 43 16 1 ) 117 43 117 44 15 1 ; 117 44 117 45 18446744073709551615 464 /**
+ * Get the Rotation Sensor's current velocity in centidegrees per second
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Rotation Sensor
+ *
+ * \param  port
+ * 				 The V5 Rotation Sensor port number from 1-21
+ * \return The velocity value or PROS_ERR_F if the operation failed, setting
+ * errno.
+ */ 119 1 131 4 18446744073709551615 7 int32_t 132 1 132 8 2 21 rotation_get_velocity 132 9 132 30 17 1 ( 132 30 132 31 17 7 uint8_t 132 31 132 38 4 4 port 132 39 132 43 18 1 ) 132 43 132 44 17 1 ; 132 44 132 45 18446744073709551615 468 /**
+ * Get the Rotation Sensor's current angle in centidegrees (0-36000)
+ * 
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Rotation Sensor
+ *
+ * \param  port
+ * 				 The V5 Rotation Sensor port number from 1-21
+ * \return The angle value (0-36000) or PROS_ERR_F if the operation failed, setting
+ * errno.
+ */ 134 1 146 4 18446744073709551615 7 int32_t 147 1 147 8 2 18 rotation_get_angle 147 9 147 27 19 1 ( 147 27 147 28 19 7 uint8_t 147 28 147 35 4 4 port 147 36 147 40 20 1 ) 147 40 147 41 19 1 ; 147 41 147 42 18446744073709551615 549 /**
+ * Set the Rotation Sensor's direction reversed flag
+ * 
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Rotation Sensor
+ *
+ * \param  port
+ * 				 The V5 Rotation Sensor port number from 1-21
+ * \param  value
+ * 				 Determines if the direction of the Rotation Sensor is reversed or not.
+ * 
+ * \return 1 if operation succeeded or PROS_ERR if the operation failed, setting
+ * errno.
+ */ 149 1 164 4 18446744073709551615 7 int32_t 165 1 165 8 2 21 rotation_set_reversed 165 9 165 30 21 1 ( 165 30 165 31 21 7 uint8_t 165 31 165 38 4 4 port 165 39 165 43 22 1 , 165 43 165 44 21 4 bool 165 45 165 49 18446744073709551615 5 value 165 50 165 55 23 1 ) 165 55 165 56 21 1 ; 165 56 165 57 18446744073709551615 450 /**
+ * Reverse the Rotation Sensor's direction
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Rotation Sensor
+ *
+ * \param  port
+ * 				 The V5 Rotation Sensor port number from 1-21
+ *
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 167 1 180 4 18446744073709551615 7 int32_t 181 1 181 8 2 16 rotation_reverse 181 9 181 25 24 1 ( 181 25 181 26 24 7 uint8_t 181 26 181 33 4 4 port 181 34 181 38 25 1 ) 181 38 181 39 24 1 ; 181 39 181 40 18446744073709551615 548 /**
+ * Initialize the Rotation Sensor with a reverse flag
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Rotation Sensor
+ *
+ * \param  port
+ * 				 The V5 Rotation Sensor port number from 1-21
+ * \param  reverse_flag
+ * 				 Determines if the Rotation Sensor is reversed or not.
+ * 
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 183 1 198 4 18446744073709551615 7 int32_t 199 1 199 8 2 21 rotation_init_reverse 199 9 199 30 26 1 ( 199 30 199 31 26 7 uint8_t 199 31 199 38 4 4 port 199 39 199 43 27 1 , 199 43 199 44 26 4 bool 199 45 199 49 18446744073709551615 12 reverse_flag 199 50 199 62 28 1 ) 199 62 199 63 26 1 ; 199 63 199 64 18446744073709551615 489 /**
+ * Get the Rotation Sensor's reversed flag
+ * 
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Rotation Sensor
+ *
+ * \param  port
+ * 				 The V5 Rotation Sensor port number from 1-21
+ * 
+ * \return Boolean value of if the Rotation Sensor's direction is reversed or not
+ * or PROS_ERR if the operation failed, setting errno.
+ */ 201 1 214 4 18446744073709551615 7 int32_t 215 1 215 8 2 21 rotation_get_reversed 215 9 215 30 29 1 ( 215 30 215 31 29 7 uint8_t 215 31 215 38 4 4 port 215 39 215 43 30 1 ) 215 43 215 44 29 1 ; 215 44 215 45 18446744073709551615 1 # 217 1 217 2 18446744073709551615 5 ifdef 217 2 217 7 18446744073709551615 11 __cplusplus 217 8 217 19 18446744073709551615 1 } 218 1 218 2 18446744073709551615 13 //namespace C 218 3 218 16 18446744073709551615 1 } 219 1 219 2 18446744073709551615 16 //namespace pros 219 3 219 19 18446744073709551615 1 } 220 1 220 2 18446744073709551615 12 //extern "C" 220 3 220 15 18446744073709551615 1 # 221 1 221 2 18446744073709551615 5 endif 221 2 221 7 18446744073709551615 1 # 223 1 223 2 18446744073709551615 5 endif 223 2 223 7 18446744073709551615 0 0 31 0 0 0 22 0 0 1 13 0 4 pros 22 1 13 0 6 c:pros 20 1 13 0 7 int32_t 8 1 13 0 21 rotation_reset:c:pros 20 1 13 0 7 uint8_t 10 1 13 0 70 49:32:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 8 1 13 0 29 rotation_set_data_rate:c:pros 10 1 13 0 70 69:40:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 20 1 13 0 8 uint32_t 10 1 13 0 70 69:55:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 8 1 13 0 28 rotation_set_position:c:pros 10 1 13 0 70 86:39:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 10 1 13 0 70 86:54:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 8 1 13 0 30 rotation_reset_position:c:pros 10 1 13 0 71 102:41:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 8 1 13 0 28 rotation_get_position:c:pros 10 1 13 0 71 117:39:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 8 1 13 0 28 rotation_get_velocity:c:pros 10 1 13 0 71 132:39:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 8 1 13 0 25 rotation_get_angle:c:pros 10 1 13 0 71 147:36:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 8 1 13 0 28 rotation_set_reversed:c:pros 10 1 13 0 71 165:39:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 10 1 13 0 71 165:50:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 8 1 13 0 23 rotation_reverse:c:pros 10 1 13 0 71 181:34:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 8 1 13 0 28 rotation_init_reverse:c:pros 10 1 13 0 71 199:39:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 10 1 13 0 71 199:50:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 8 1 13 0 28 rotation_get_reversed:c:pros 10 1 13 0 71 215:39:/home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 0 0 1 0 0 0 64 /home/bluecore/Desktop/Pros/Main Project/include/pros/rotation.h 1698321186

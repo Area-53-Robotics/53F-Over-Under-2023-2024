@@ -1,0 +1,233 @@
+22 serialization::archive 19 0 0 0 0 40 /home/bluecore/Desktop/Pros/Main Project 40 /home/bluecore/Desktop/Pros/Main Project 0 0 261 0 0 0 553 /**
+ * \file pros/gps.h
+ *
+ * Contains prototypes for functions related to the VEX GPS.
+ *
+ * Visit https://pros.cs.purdue.edu/v5/api/c/gps.html to learn
+ * more.
+ *
+ * This file should not be modified by users, since it gets replaced whenever
+ * a kernel upgrade occurs.
+ *
+ * \copyright Copyright (c) 2017-2023, Purdue University ACM SIGBots.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */ 1 1 17 4 18446744073709551615 1 # 19 1 19 2 18446744073709551615 6 ifndef 19 2 19 8 18446744073709551615 12 _PROS_GPS_H_ 19 9 19 21 18446744073709551615 1 # 20 1 20 2 18446744073709551615 6 define 20 2 20 8 18446744073709551615 12 _PROS_GPS_H_ 20 9 20 21 18446744073709551615 1 # 22 1 22 2 18446744073709551615 7 include 22 2 22 9 18446744073709551615 1 < 22 10 22 11 18446744073709551615 7 stdbool 22 11 22 18 18446744073709551615 1 . 22 18 22 19 18446744073709551615 1 h 22 19 22 20 18446744073709551615 1 > 22 20 22 21 18446744073709551615 1 # 23 1 23 2 18446744073709551615 7 include 23 2 23 9 18446744073709551615 1 < 23 10 23 11 18446744073709551615 6 stdint 23 11 23 17 18446744073709551615 1 . 23 17 23 18 18446744073709551615 1 h 23 18 23 19 18446744073709551615 1 > 23 19 23 20 18446744073709551615 1 # 25 1 25 2 18446744073709551615 5 ifdef 25 2 25 7 18446744073709551615 11 __cplusplus 25 8 25 19 18446744073709551615 6 extern 26 1 26 7 18446744073709551615 3 "C" 26 8 26 11 18446744073709551615 1 { 26 12 26 13 18446744073709551615 9 namespace 27 1 27 10 18446744073709551615 4 pros 27 11 27 15 0 1 { 27 16 27 17 18446744073709551615 9 namespace 28 1 28 10 18446744073709551615 1 c 28 11 28 12 1 1 { 28 13 28 14 18446744073709551615 1 # 29 1 29 2 18446744073709551615 5 endif 29 2 29 7 18446744073709551615 7 typedef 31 1 31 8 18446744073709551615 6 struct 31 9 31 15 18446744073709551615 13 __attribute__ 31 16 31 29 18446744073709551615 1 ( 31 29 31 30 18446744073709551615 1 ( 31 30 31 31 18446744073709551615 10 __packed__ 31 31 31 41 18446744073709551615 1 ) 31 41 31 42 18446744073709551615 1 ) 31 42 31 43 18446744073709551615 12 gps_status_s 31 44 31 56 2 1 { 31 57 31 58 18446744073709551615 6 double 32 2 32 8 18446744073709551615 1 x 32 9 32 10 3 1 ; 32 10 32 11 18446744073709551615 24 ///< X Position (meters) 32 17 32 41 18446744073709551615 6 double 33 2 33 8 18446744073709551615 1 y 33 9 33 10 4 1 ; 33 10 33 11 18446744073709551615 24 ///< Y Position (meters) 33 17 33 41 18446744073709551615 6 double 34 2 34 8 18446744073709551615 5 pitch 34 9 34 14 5 1 ; 34 14 34 15 18446744073709551615 39 ///< Percieved Pitch based on GPS + IMU 34 17 34 56 18446744073709551615 6 double 35 2 35 8 18446744073709551615 4 roll 35 9 35 13 6 1 ; 35 13 35 14 18446744073709551615 38 ///< Percieved Roll based on GPS + IMU 35 17 35 55 18446744073709551615 6 double 36 2 36 8 18446744073709551615 3 yaw 36 9 36 12 7 1 ; 36 12 36 13 18446744073709551615 37 ///< Percieved Yaw based on GPS + IMU 36 17 36 54 18446744073709551615 1 } 37 1 37 2 18446744073709551615 14 gps_status_s_t 37 3 37 17 8 1 ; 37 17 37 18 18446744073709551615 6 struct 39 1 39 7 18446744073709551615 9 gps_raw_s 39 8 39 17 9 1 { 39 18 39 19 18446744073709551615 6 double 40 2 40 8 18446744073709551615 1 x 40 9 40 10 10 1 ; 40 10 40 11 18446744073709551615 39 ///< Percieved Pitch based on GPS + IMU 40 13 40 52 18446744073709551615 6 double 41 2 41 8 18446744073709551615 1 y 41 9 41 10 11 1 ; 41 10 41 11 18446744073709551615 38 ///< Percieved Roll based on GPS + IMU 41 13 41 51 18446744073709551615 6 double 42 2 42 8 18446744073709551615 1 z 42 9 42 10 12 1 ; 42 10 42 11 18446744073709551615 37 ///< Percieved Yaw based on GPS + IMU 42 13 42 50 18446744073709551615 1 } 43 1 43 2 18446744073709551615 1 ; 43 2 43 3 18446744073709551615 7 typedef 45 1 45 8 18446744073709551615 6 struct 45 9 45 15 18446744073709551615 9 gps_raw_s 45 16 45 25 9 13 gps_accel_s_t 45 26 45 39 13 1 ; 45 39 45 40 18446744073709551615 7 typedef 46 1 46 8 18446744073709551615 6 struct 46 9 46 15 18446744073709551615 9 gps_raw_s 46 16 46 25 9 12 gps_gyro_s_t 46 26 46 38 14 1 ; 46 38 46 39 18446744073709551615 1040 /**
+ * Set the GPS's offset relative to the center of turning in meters,
+ * as well as its initial position.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as a GPS
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 GPS port number from 1-21
+ * \param  xOffset
+ * 				 Cartesian 4-Quadrant X offset from center of turning (meters)
+ * \param  yOffset
+ * 				 Cartesian 4-Quadrant Y offset from center of turning (meters)
+ * \param  xInitial
+ * 				 Initial 4-Quadrant X Position, with (0,0) being at the center of the field (meters)
+ * \param  yInitial
+ * 				 Initial 4-Quadrant Y Position, with (0,0) being at the center of the field (meters)
+ * \param  headingInitial
+ *  			 Heading with 0 being north on the field, in degrees [0,360) going clockwise
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 48 1 72 4 18446744073709551615 7 int32_t 73 1 73 8 15 19 gps_initialize_full 73 9 73 28 16 1 ( 73 28 73 29 16 7 uint8_t 73 29 73 36 17 4 port 73 37 73 41 18 1 , 73 41 73 42 16 6 double 73 43 73 49 18446744073709551615 8 xInitial 73 50 73 58 19 1 , 73 58 73 59 16 6 double 73 60 73 66 18446744073709551615 8 yInitial 73 67 73 75 20 1 , 73 75 73 76 16 6 double 73 77 73 83 18446744073709551615 14 headingInitial 73 84 73 98 21 1 , 73 98 73 99 16 6 double 73 100 73 106 18446744073709551615 7 xOffset 73 107 73 114 22 1 , 73 114 73 115 16 6 double 74 29 74 35 18446744073709551615 7 yOffset 74 36 74 43 23 1 ) 74 43 74 44 16 1 ; 74 44 74 45 18446744073709551615 670 /**
+ * Set the GPS's offset relative to the center of turning in meters.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as a GPS
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 GPS port number from 1-21
+ * \param  xOffset
+ * 				 Cartesian 4-Quadrant X offset from center of turning (meters)
+ * \param  yOffset
+ * 				 Cartesian 4-Quadrant Y offset from center of turning (meters)
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 76 1 93 4 18446744073709551615 7 int32_t 94 1 94 8 15 14 gps_set_offset 94 9 94 23 24 1 ( 94 23 94 24 24 7 uint8_t 94 24 94 31 17 4 port 94 32 94 36 25 1 , 94 36 94 37 24 6 double 94 38 94 44 18446744073709551615 7 xOffset 94 45 94 52 26 1 , 94 52 94 53 24 6 double 94 54 94 60 18446744073709551615 7 yOffset 94 61 94 68 27 1 ) 94 68 94 69 24 1 ; 94 69 94 70 18446744073709551615 701 /**
+ * Get the GPS's location relative to the center of turning/origin in meters.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as a GPS
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 GPS port number from 1-21
+ * \param  xOffset
+ * 				 Pointer to cartesian 4-Quadrant X offset from center of turning (meters)
+ * \param  yOffset
+ * 				 Pointer to cartesian 4-Quadrant Y offset from center of turning (meters)
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 96 1 113 4 18446744073709551615 7 int32_t 114 1 114 8 15 14 gps_get_offset 114 9 114 23 28 1 ( 114 23 114 24 28 7 uint8_t 114 24 114 31 17 4 port 114 32 114 36 29 1 , 114 36 114 37 28 6 double 114 38 114 44 18446744073709551615 1 * 114 44 114 45 18446744073709551615 7 xOffset 114 46 114 53 30 1 , 114 53 114 54 28 6 double 114 55 114 61 18446744073709551615 1 * 114 61 114 62 18446744073709551615 7 yOffset 114 63 114 70 31 1 ) 114 70 114 71 28 1 ; 114 71 114 72 18446744073709551615 833 /**
+ * Sets the robot's location relative to the center of the field in meters.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as a GPS
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 GPS port number from 1-21
+ * \param  xInitial
+ * 				 Initial 4-Quadrant X Position, with (0,0) being at the center of the field (meters)
+ * \param  yInitial
+ * 				 Initial 4-Quadrant Y Position, with (0,0) being at the center of the field (meters)
+ * \param  headingInitial
+ *  			 Heading with 0 being north on the field, in degrees [0,360) going clockwise
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 116 1 135 4 18446744073709551615 7 int32_t 136 1 136 8 15 16 gps_set_position 136 9 136 25 32 1 ( 136 25 136 26 32 7 uint8_t 136 26 136 33 17 4 port 136 34 136 38 33 1 , 136 38 136 39 32 6 double 136 40 136 46 18446744073709551615 8 xInitial 136 47 136 55 34 1 , 136 55 136 56 32 6 double 136 57 136 63 18446744073709551615 8 yInitial 136 64 136 72 35 1 , 136 72 136 73 32 6 double 136 74 136 80 18446744073709551615 14 headingInitial 136 81 136 95 36 1 ) 136 95 136 96 32 1 ; 136 96 136 97 18446744073709551615 568 /**
+ * Set the GPS sensor's data rate in milliseconds, only applies to IMU on GPS.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as a GPS
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 GPS port number from 1-21
+ * \param  rate
+ * 				 Data rate in milliseconds (Minimum: 5 ms)
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 138 1 153 4 18446744073709551615 7 int32_t 154 1 154 8 15 17 gps_set_data_rate 154 9 154 26 37 1 ( 154 26 154 27 37 7 uint8_t 154 27 154 34 17 4 port 154 35 154 39 38 1 , 154 39 154 40 37 8 uint32_t 154 41 154 49 39 4 rate 154 50 154 54 40 1 ) 154 54 154 55 37 1 ; 154 55 154 56 18446744073709551615 547 /**
+ * Get the possible RMS (Root Mean Squared) error in meters for GPS position.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as a GPS
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 GPS port number from 1-21
+ *
+ * \return Possible RMS (Root Mean Squared) error in meters for GPS position.
+ * If the operation failed, returns PROS_ERR_F and errno is set.
+ */ 156 1 170 4 18446744073709551615 6 double 171 1 171 7 18446744073709551615 13 gps_get_error 171 8 171 21 41 1 ( 171 21 171 22 41 7 uint8_t 171 22 171 29 17 4 port 171 30 171 34 42 1 ) 171 34 171 35 41 1 ; 171 35 171 36 18446744073709551615 560 /**
+ * Gets the position and roll, yaw, and pitch of the GPS.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as a GPS
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 GPS port number from 1-21
+ *
+ * \return A struct (gps_status_s_t) containing values mentioned above.
+ * If the operation failed, all the structure's members are filled with
+ * PROS_ERR_F and errno is set.
+ */ 173 1 188 4 18446744073709551615 14 gps_status_s_t 189 1 189 15 8 14 gps_get_status 189 16 189 30 43 1 ( 189 30 189 31 43 7 uint8_t 189 31 189 38 17 4 port 189 39 189 43 44 1 ) 189 43 189 44 43 1 ; 189 44 189 45 18446744073709551615 485 /**
+ * Get the heading in [0,360) degree values.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as a GPS
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 GPS port number from 1-21
+ *
+ * \return The heading in [0,360) degree values. If the operation failed,
+ * returns PROS_ERR_F and errno is set.
+ */ 191 1 205 4 18446744073709551615 6 double 206 1 206 7 18446744073709551615 15 gps_get_heading 206 8 206 23 45 1 ( 206 23 206 24 45 7 uint8_t 206 24 206 31 17 4 port 206 32 206 36 46 1 ) 206 36 206 37 45 1 ; 206 37 206 38 18446744073709551615 520 /**
+ * Get the heading in the max double value and min double value scale.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as a GPS
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 GPS port number from 1-21
+ *
+ * \return The heading in [DOUBLE_MIN, DOUBLE_MAX] values. If the operation
+ * fails, returns PROS_ERR_F and errno is set.
+ */ 208 1 222 4 18446744073709551615 6 double 223 1 223 7 18446744073709551615 19 gps_get_heading_raw 223 8 223 27 47 1 ( 223 27 223 28 47 7 uint8_t 223 28 223 35 17 4 port 223 36 223 40 48 1 ) 223 40 223 41 47 1 ; 223 41 223 42 18446744073709551615 477 /**
+ * Gets the GPS sensor's elapsed rotation value
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as a GPS
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 GPS port number from 1-21
+ * \return The elased heading in degrees. If the operation fails, returns
+ * PROS_ERR_F and errno is set.
+ */ 225 1 238 4 18446744073709551615 6 double 239 1 239 7 18446744073709551615 16 gps_get_rotation 239 8 239 24 49 1 ( 239 24 239 25 49 7 uint8_t 239 25 239 32 17 4 port 239 33 239 37 50 1 ) 239 37 239 38 49 1 ; 239 38 239 39 18446744073709551615 551 /**
+ * Set the GPS sensor's rotation value to target value
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as a GPS
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 GPS port number from 1-21
+ * \param  target
+ * 				 Target rotation value to set rotation value to
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 241 1 256 4 18446744073709551615 7 int32_t 257 1 257 8 15 16 gps_set_rotation 257 9 257 25 51 1 ( 257 25 257 26 51 7 uint8_t 257 26 257 33 17 4 port 257 34 257 38 52 1 , 257 38 257 39 51 6 double 257 40 257 46 18446744073709551615 6 target 257 47 257 53 53 1 ) 257 53 257 54 51 1 ; 257 54 257 55 18446744073709551615 463 /**
+ * Tare the GPS sensor's rotation value
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as a GPS
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 GPS port number from 1-21
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 259 1 272 4 18446744073709551615 7 int32_t 273 1 273 8 15 17 gps_tare_rotation 273 9 273 26 54 1 ( 273 26 273 27 54 7 uint8_t 273 27 273 34 17 4 port 273 35 273 39 55 1 ) 273 39 273 40 54 1 ; 273 40 273 41 18446744073709551615 499 /**
+ * Get the GPS's raw gyroscope values
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as a GPS
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 GPS port number from 1-21
+ * \return The raw gyroscope values. If the operation failed, all the
+ * structure's members are filled with PROS_ERR_F and errno is set.
+ */ 275 1 288 4 18446744073709551615 12 gps_gyro_s_t 289 1 289 13 14 17 gps_get_gyro_rate 289 14 289 31 56 1 ( 289 31 289 32 56 7 uint8_t 289 32 289 39 17 4 port 289 40 289 44 57 1 ) 289 44 289 45 56 1 ; 289 45 289 46 18446744073709551615 510 /**
+ * Get the GPS's raw accelerometer values
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an GPS
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 GPS's port number from 1-21
+ * \return The raw accelerometer values. If the operation failed, all the
+ * structure's members are filled with PROS_ERR_F and errno is set.
+ */ 291 1 304 4 18446744073709551615 13 gps_accel_s_t 305 1 305 14 13 13 gps_get_accel 305 15 305 28 58 1 ( 305 28 305 29 58 7 uint8_t 305 29 305 36 17 4 port 305 37 305 41 59 1 ) 305 41 305 42 58 1 ; 305 42 305 43 18446744073709551615 1 # 307 1 307 2 18446744073709551615 5 ifdef 307 2 307 7 18446744073709551615 11 __cplusplus 307 8 307 19 18446744073709551615 1 } 308 1 308 2 18446744073709551615 1 } 309 1 309 2 18446744073709551615 1 } 310 1 310 2 18446744073709551615 1 # 311 1 311 2 18446744073709551615 5 endif 311 2 311 7 18446744073709551615 1 # 313 1 313 2 18446744073709551615 5 endif 313 2 313 7 18446744073709551615 0 0 60 0 0 0 22 0 0 1 13 0 4 pros 22 1 13 0 6 c:pros 2 1 13 0 19 gps_status_s:c:pros 6 1 13 0 21 x:gps_status_s:c:pros 6 1 13 0 21 y:gps_status_s:c:pros 6 1 13 0 25 pitch:gps_status_s:c:pros 6 1 13 0 24 roll:gps_status_s:c:pros 6 1 13 0 23 yaw:gps_status_s:c:pros 20 1 13 0 21 gps_status_s_t:c:pros 2 1 13 0 16 gps_raw_s:c:pros 6 1 13 0 18 x:gps_raw_s:c:pros 6 1 13 0 18 y:gps_raw_s:c:pros 6 1 13 0 18 z:gps_raw_s:c:pros 20 1 13 0 20 gps_accel_s_t:c:pros 20 1 13 0 19 gps_gyro_s_t:c:pros 20 1 13 0 7 int32_t 8 1 13 0 26 gps_initialize_full:c:pros 20 1 13 0 7 uint8_t 10 1 13 0 65 73:37:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 10 1 13 0 65 73:50:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 10 1 13 0 65 73:67:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 10 1 13 0 65 73:84:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 10 1 13 0 66 73:107:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 10 1 13 0 65 74:36:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 8 1 13 0 21 gps_set_offset:c:pros 10 1 13 0 65 94:32:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 10 1 13 0 65 94:45:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 10 1 13 0 65 94:61:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 8 1 13 0 21 gps_get_offset:c:pros 10 1 13 0 66 114:32:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 10 1 13 0 66 114:46:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 10 1 13 0 66 114:63:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 8 1 13 0 23 gps_set_position:c:pros 10 1 13 0 66 136:34:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 10 1 13 0 66 136:47:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 10 1 13 0 66 136:64:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 10 1 13 0 66 136:81:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 8 1 13 0 24 gps_set_data_rate:c:pros 10 1 13 0 66 154:35:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 20 1 13 0 8 uint32_t 10 1 13 0 66 154:50:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 8 1 13 0 20 gps_get_error:c:pros 10 1 13 0 66 171:30:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 8 1 13 0 21 gps_get_status:c:pros 10 1 13 0 66 189:39:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 8 1 13 0 22 gps_get_heading:c:pros 10 1 13 0 66 206:32:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 8 1 13 0 26 gps_get_heading_raw:c:pros 10 1 13 0 66 223:36:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 8 1 13 0 23 gps_get_rotation:c:pros 10 1 13 0 66 239:33:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 8 1 13 0 23 gps_set_rotation:c:pros 10 1 13 0 66 257:34:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 10 1 13 0 66 257:47:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 8 1 13 0 24 gps_tare_rotation:c:pros 10 1 13 0 66 273:35:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 8 1 13 0 24 gps_get_gyro_rate:c:pros 10 1 13 0 66 289:40:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 8 1 13 0 20 gps_get_accel:c:pros 10 1 13 0 66 305:37:/home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 0 0 1 0 0 0 59 /home/bluecore/Desktop/Pros/Main Project/include/pros/gps.h 1698321182

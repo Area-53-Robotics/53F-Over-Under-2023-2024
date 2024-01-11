@@ -1,0 +1,401 @@
+22 serialization::archive 19 0 0 0 0 40 /home/bluecore/Desktop/Pros/Main Project 40 /home/bluecore/Desktop/Pros/Main Project 0 0 403 0 0 0 577 /**
+ * \file pros/imu.h
+ *
+ * Contains prototypes for functions related to the VEX Inertial sensor.
+ *
+ * Visit https://pros.cs.purdue.edu/v5/tutorials/topical/imu.html to learn
+ * more.
+ *
+ * This file should not be modified by users, since it gets replaced whenever
+ * a kernel upgrade occurs.
+ *
+ * \copyright Copyright (c) 2017-2023, Purdue University ACM SIGBots.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */ 1 1 17 4 18446744073709551615 1 # 19 1 19 2 18446744073709551615 6 ifndef 19 2 19 8 18446744073709551615 12 _PROS_IMU_H_ 19 9 19 21 18446744073709551615 1 # 20 1 20 2 18446744073709551615 6 define 20 2 20 8 18446744073709551615 12 _PROS_IMU_H_ 20 9 20 21 18446744073709551615 1 # 22 1 22 2 18446744073709551615 7 include 22 2 22 9 18446744073709551615 1 < 22 10 22 11 18446744073709551615 7 stdbool 22 11 22 18 18446744073709551615 1 . 22 18 22 19 18446744073709551615 1 h 22 19 22 20 18446744073709551615 1 > 22 20 22 21 18446744073709551615 1 # 23 1 23 2 18446744073709551615 7 include 23 2 23 9 18446744073709551615 1 < 23 10 23 11 18446744073709551615 6 stdint 23 11 23 17 18446744073709551615 1 . 23 17 23 18 18446744073709551615 1 h 23 18 23 19 18446744073709551615 1 > 23 19 23 20 18446744073709551615 1 # 25 1 25 2 18446744073709551615 5 ifdef 25 2 25 7 18446744073709551615 11 __cplusplus 25 8 25 19 18446744073709551615 6 extern 26 1 26 7 18446744073709551615 3 "C" 26 8 26 11 18446744073709551615 1 { 26 12 26 13 18446744073709551615 9 namespace 27 1 27 10 18446744073709551615 4 pros 27 11 27 15 0 1 { 27 16 27 17 18446744073709551615 9 namespace 28 1 28 10 18446744073709551615 1 c 28 11 28 12 1 1 { 28 13 28 14 18446744073709551615 1 # 29 1 29 2 18446744073709551615 5 endif 29 2 29 7 18446744073709551615 7 typedef 31 1 31 8 18446744073709551615 4 enum 31 9 31 13 18446744073709551615 12 imu_status_e 31 14 31 26 2 1 { 31 27 31 28 18446744073709551615 24 E_IMU_STATUS_CALIBRATING 32 2 32 26 3 1 = 32 27 32 28 18446744073709551615 4 0x01 32 29 32 33 18446744073709551615 1 , 32 33 32 34 18446744073709551615 18 E_IMU_STATUS_ERROR 33 2 33 20 4 1 = 33 21 33 22 18446744073709551615 4 0xFF 33 23 33 27 18446744073709551615 1 , 33 27 33 28 18446744073709551615 86 // NOTE: used for returning an error from the get_status function, not that the IMU is 33 30 33 116 18446744073709551615 32 // necessarily in an error state 34 30 34 62 18446744073709551615 1 } 35 1 35 2 18446744073709551615 14 imu_status_e_t 35 3 35 17 5 1 ; 35 17 35 18 18446744073709551615 7 typedef 37 1 37 8 18446744073709551615 6 struct 37 9 37 15 18446744073709551615 13 __attribute__ 37 16 37 29 18446744073709551615 1 ( 37 29 37 30 18446744073709551615 1 ( 37 30 37 31 18446744073709551615 10 __packed__ 37 31 37 41 18446744073709551615 1 ) 37 41 37 42 18446744073709551615 1 ) 37 42 37 43 18446744073709551615 12 quaternion_s 37 44 37 56 6 1 { 37 57 37 58 18446744073709551615 6 double 38 2 38 8 18446744073709551615 1 x 38 9 38 10 7 1 ; 38 10 38 11 18446744073709551615 6 double 39 2 39 8 18446744073709551615 1 y 39 9 39 10 8 1 ; 39 10 39 11 18446744073709551615 6 double 40 2 40 8 18446744073709551615 1 z 40 9 40 10 9 1 ; 40 10 40 11 18446744073709551615 6 double 41 2 41 8 18446744073709551615 1 w 41 9 41 10 10 1 ; 41 10 41 11 18446744073709551615 1 } 42 1 42 2 18446744073709551615 14 quaternion_s_t 42 3 42 17 11 1 ; 42 17 42 18 18446744073709551615 6 struct 44 1 44 7 18446744073709551615 9 imu_raw_s 44 8 44 17 12 1 { 44 18 44 19 18446744073709551615 6 double 45 2 45 8 18446744073709551615 1 x 45 9 45 10 13 1 ; 45 10 45 11 18446744073709551615 6 double 46 2 46 8 18446744073709551615 1 y 46 9 46 10 14 1 ; 46 10 46 11 18446744073709551615 6 double 47 2 47 8 18446744073709551615 1 z 47 9 47 10 15 1 ; 47 10 47 11 18446744073709551615 1 } 48 1 48 2 18446744073709551615 1 ; 48 2 48 3 18446744073709551615 7 typedef 50 1 50 8 18446744073709551615 6 struct 50 9 50 15 18446744073709551615 9 imu_raw_s 50 16 50 25 12 12 imu_gyro_s_t 50 26 50 38 16 1 ; 50 38 50 39 18446744073709551615 7 typedef 51 1 51 8 18446744073709551615 6 struct 51 9 51 15 18446744073709551615 9 imu_raw_s 51 16 51 25 12 13 imu_accel_s_t 51 26 51 39 17 1 ; 51 39 51 40 18446744073709551615 7 typedef 53 1 53 8 18446744073709551615 6 struct 53 9 53 15 18446744073709551615 13 __attribute__ 53 16 53 29 18446744073709551615 1 ( 53 29 53 30 18446744073709551615 1 ( 53 30 53 31 18446744073709551615 10 __packed__ 53 31 53 41 18446744073709551615 1 ) 53 41 53 42 18446744073709551615 1 ) 53 42 53 43 18446744073709551615 7 euler_s 53 44 53 51 18 1 { 53 52 53 53 18446744073709551615 6 double 54 2 54 8 18446744073709551615 5 pitch 54 9 54 14 19 1 ; 54 14 54 15 18446744073709551615 6 double 55 2 55 8 18446744073709551615 4 roll 55 9 55 13 20 1 ; 55 13 55 14 18446744073709551615 6 double 56 2 56 8 18446744073709551615 3 yaw 56 9 56 12 21 1 ; 56 12 56 13 18446744073709551615 1 } 57 1 57 2 18446744073709551615 9 euler_s_t 57 3 57 12 22 1 ; 57 12 57 13 18446744073709551615 1 # 59 1 59 2 18446744073709551615 5 ifdef 59 2 59 7 18446744073709551615 21 PROS_USE_SIMPLE_NAMES 59 8 59 29 18446744073709551615 1 # 60 1 60 2 18446744073709551615 5 ifdef 60 2 60 7 18446744073709551615 11 __cplusplus 60 8 60 19 18446744073709551615 1 # 61 1 61 2 18446744073709551615 6 define 61 2 61 8 18446744073709551615 22 IMU_STATUS_CALIBRATING 61 9 61 31 18446744073709551615 4 pros 61 32 61 36 18446744073709551615 2 :: 61 36 61 38 18446744073709551615 24 E_IMU_STATUS_CALIBRATING 61 38 61 62 18446744073709551615 1 # 62 1 62 2 18446744073709551615 6 define 62 2 62 8 18446744073709551615 16 IMU_STATUS_ERROR 62 9 62 25 18446744073709551615 4 pros 62 26 62 30 18446744073709551615 2 :: 62 30 62 32 18446744073709551615 18 E_IMU_STATUS_ERROR 62 32 62 50 18446744073709551615 1 # 63 1 63 2 18446744073709551615 4 else 63 2 63 6 18446744073709551615 1 # 64 1 64 2 18446744073709551615 6 define 64 2 64 8 18446744073709551615 22 IMU_STATUS_CALIBRATING 64 9 64 31 18446744073709551615 24 E_IMU_STATUS_CALIBRATING 64 32 64 56 18446744073709551615 1 # 65 1 65 2 18446744073709551615 6 define 65 2 65 8 18446744073709551615 16 IMU_STATUS_ERROR 65 9 65 25 18446744073709551615 18 E_IMU_STATUS_ERROR 65 26 65 44 18446744073709551615 1 # 66 1 66 2 18446744073709551615 5 endif 66 2 66 7 18446744073709551615 1 # 67 1 67 2 18446744073709551615 5 endif 67 2 67 7 18446744073709551615 1 # 69 1 69 2 18446744073709551615 6 define 69 2 69 8 18446744073709551615 21 IMU_MINIMUM_DATA_RATE 69 9 69 30 18446744073709551615 1 5 69 31 69 32 18446744073709551615 698 /**
+ * Calibrate IMU
+ *
+ * Calibration takes approximately 2 seconds, but this function only blocks
+ * until the IMU status flag is set properly to E_IMU_STATUS_CALIBRATING,
+ * with a minimum blocking time of 5ms.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is already calibrating, or time out setting the status flag.
+ *
+ * \param port
+ *        The V5 Inertial Sensor port number from 1-21
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed setting errno.
+ */ 71 1 88 4 18446744073709551615 7 int32_t 89 1 89 8 23 9 imu_reset 89 9 89 18 24 1 ( 89 18 89 19 24 7 uint8_t 89 19 89 26 25 4 port 89 27 89 31 26 1 ) 89 31 89 32 24 1 ; 89 32 89 33 18446744073709551615 949 /**
+ * Calibrate IMU and Blocks while Calibrating
+ *
+ * Calibration takes approximately 2 seconds and blocks during this period, 
+ * with a timeout for this operation being set a 3 seconds as a safety margin.
+ * Like the other reset function, this function also blocks until the IMU 
+ * status flag is set properly to E_IMU_STATUS_CALIBRATING, with a minimum 
+ * blocking time of 5ms and a timeout of 1 second if it's never set.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is already calibrating, or time out setting the status flag.
+ *
+ * \param port
+ *        The V5 Inertial Sensor port number from 1-21
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed (timing out or port claim failure), setting errno.
+ */ 91 1 110 4 18446744073709551615 7 int32_t 111 1 111 8 23 18 imu_reset_blocking 111 9 111 27 27 1 ( 111 27 111 28 27 7 uint8_t 111 28 111 35 25 4 port 111 36 111 40 28 1 ) 111 40 111 41 27 1 ; 111 41 111 42 18446744073709551615 1003 /**
+ * Set the Inertial Sensor's refresh interval in milliseconds.
+ *
+ * The rate may be specified in increments of 5ms, and will be rounded down to
+ * the nearest increment. The minimum allowable refresh rate is 5ms. The default
+ * rate is 10ms.
+ *
+ * As values are copied into the shared memory buffer only at 10ms intervals,
+ * setting this value to less than 10ms does not mean that you can poll the
+ * sensor's values any faster. However, it will guarantee that the data is as
+ * recent as possible.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param port
+ *		  The V5 Inertial Sensor port number from 1-21
+ * \param rate The data refresh interval in milliseconds
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 113 1 136 4 18446744073709551615 7 int32_t 137 1 137 8 23 17 imu_set_data_rate 137 9 137 26 29 1 ( 137 26 137 27 29 7 uint8_t 137 27 137 34 25 4 port 137 35 137 39 30 1 , 137 39 137 40 29 8 uint32_t 137 41 137 49 31 4 rate 137 50 137 54 32 1 ) 137 54 137 55 29 1 ; 137 55 137 56 18446744073709551615 699 /**
+ * Get the total number of degrees the Inertial Sensor has spun about the z-axis
+ *
+ * This value is theoretically unbounded. Clockwise rotations are represented
+ * with positive degree values, while counterclockwise rotations are represented
+ * with negative ones.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return The degree value or PROS_ERR_F if the operation failed, setting
+ * errno.
+ */ 139 1 156 4 18446744073709551615 6 double 157 1 157 7 18446744073709551615 16 imu_get_rotation 157 8 157 24 33 1 ( 157 24 157 25 33 7 uint8_t 157 25 157 32 25 4 port 157 33 157 37 34 1 ) 157 37 157 38 33 1 ; 157 38 157 39 18446744073709551615 701 /**
+ * Get the Inertial Sensor's heading relative to the initial direction of its
+ * x-axis
+ *
+ * This value is bounded by [0,360). Clockwise rotations are represented with
+ * positive degree values, while counterclockwise rotations are represented with
+ * negative ones.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return The degree value or PROS_ERR_F if the operation failed, setting
+ * errno.
+ */ 159 1 177 4 18446744073709551615 6 double 178 1 178 7 18446744073709551615 15 imu_get_heading 178 8 178 23 35 1 ( 178 23 178 24 35 7 uint8_t 178 24 178 31 25 4 port 178 32 178 36 36 1 ) 178 36 178 37 35 1 ; 178 37 178 38 18446744073709551615 585 /**
+ * Get a quaternion representing the Inertial Sensor's orientation
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return The quaternion representing the sensor's orientation. If the
+ * operation failed, all the quaternion's members are filled with PROS_ERR_F and
+ * errno is set.
+ */ 180 1 194 4 18446744073709551615 14 quaternion_s_t 195 1 195 15 11 18 imu_get_quaternion 195 16 195 34 37 1 ( 195 34 195 35 37 7 uint8_t 195 35 195 42 25 4 port 195 43 195 47 38 1 ) 195 47 195 48 37 1 ; 195 48 195 49 18446744073709551615 590 /**
+ * Get the Euler angles representing the Inertial Sensor's orientation
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return The Euler angles representing the sensor's orientation. If the
+ * operation failed, all the structure's members are filled with PROS_ERR_F and
+ * errno is set.
+ */ 197 1 211 4 18446744073709551615 9 euler_s_t 212 1 212 10 22 13 imu_get_euler 212 11 212 24 39 1 ( 212 24 212 25 39 7 uint8_t 212 25 212 32 25 4 port 212 33 212 37 40 1 ) 212 37 212 38 39 1 ; 212 38 212 39 18446744073709551615 496 /**
+ * Get the Inertial Sensor's pitch angle bounded by (-180,180)
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return The pitch angle, or PROS_ERR_F if the operation failed, setting
+ * errno.
+ */ 214 1 227 4 18446744073709551615 6 double 228 1 228 7 18446744073709551615 13 imu_get_pitch 228 8 228 21 41 1 ( 228 21 228 22 41 7 uint8_t 228 22 228 29 25 4 port 228 30 228 34 42 1 ) 228 34 228 35 41 1 ; 228 35 228 36 18446744073709551615 491 /**
+ * Get the Inertial Sensor's roll angle bounded by (-180,180)
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return The roll angle, or PROS_ERR_F if the operation failed, setting errno.
+ */ 230 1 242 4 18446744073709551615 6 double 243 1 243 7 18446744073709551615 12 imu_get_roll 243 8 243 20 43 1 ( 243 20 243 21 43 7 uint8_t 243 21 243 28 25 4 port 243 29 243 33 44 1 ) 243 33 243 34 43 1 ; 243 34 243 35 18446744073709551615 489 /**
+ * Get the Inertial Sensor's yaw angle bounded by (-180,180)
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return The yaw angle, or PROS_ERR_F if the operation failed, setting errno.
+ */ 245 1 257 4 18446744073709551615 6 double 258 1 258 7 18446744073709551615 11 imu_get_yaw 258 8 258 19 45 1 ( 258 19 258 20 45 7 uint8_t 258 20 258 27 25 4 port 258 28 258 32 46 1 ) 258 32 258 33 45 1 ; 258 33 258 34 18446744073709551615 536 /**
+ * Get the Inertial Sensor's raw gyroscope values
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return The raw gyroscope values. If the operation failed, all the
+ * structure's members are filled with PROS_ERR_F and errno is set.
+ */ 260 1 273 4 18446744073709551615 12 imu_gyro_s_t 274 1 274 13 16 17 imu_get_gyro_rate 274 14 274 31 47 1 ( 274 31 274 32 47 7 uint8_t 274 32 274 39 25 4 port 274 40 274 44 48 1 ) 274 44 274 45 47 1 ; 274 45 274 46 18446744073709551615 544 /**
+ * Get the Inertial Sensor's raw acceleroneter values
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return The raw accelerometer values. If the operation failed, all the
+ * structure's members are filled with PROS_ERR_F and errno is set.
+ */ 276 1 289 4 18446744073709551615 13 imu_accel_s_t 290 1 290 14 17 13 imu_get_accel 290 15 290 28 49 1 ( 290 28 290 29 49 7 uint8_t 290 29 290 36 25 4 port 290 37 290 41 50 1 ) 290 41 290 42 49 1 ; 290 42 290 43 18446744073709551615 485 /**
+ * Get the Inertial Sensor's status
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return The Inertial Sensor's status code, or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 292 1 305 4 18446744073709551615 14 imu_status_e_t 306 1 306 15 5 14 imu_get_status 306 16 306 30 51 1 ( 306 30 306 31 51 7 uint8_t 306 31 306 38 25 4 port 306 39 306 43 52 1 ) 306 43 306 44 51 1 ; 306 44 306 45 18446744073709551615 17 // NOTE: not used 308 1 308 18 18446744073709551615 50 // void imu_set_mode(uint8_t port, uint32_t mode); 309 1 309 51 18446744073709551615 39 // uint32_t imu_get_mode(uint8_t port); 310 1 310 40 18446744073709551615 24 //Value reset functions: 312 1 312 25 18446744073709551615 519 /**
+ * Resets the current reading of the Inertial Sensor's heading to zero
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 313 1 326 4 18446744073709551615 7 int32_t 327 1 327 8 23 16 imu_tare_heading 327 9 327 25 53 1 ( 327 25 327 26 53 7 uint8_t 327 26 327 33 25 4 port 327 34 327 38 54 1 ) 327 38 327 39 53 1 ; 327 39 327 40 18446744073709551615 520 /**
+ * Resets the current reading of the Inertial Sensor's rotation to zero
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 329 1 342 4 18446744073709551615 7 int32_t 343 1 343 8 23 17 imu_tare_rotation 343 9 343 26 55 1 ( 343 26 343 27 55 7 uint8_t 343 27 343 34 25 4 port 343 35 343 39 56 1 ) 343 39 343 40 55 1 ; 343 40 343 41 18446744073709551615 517 /**
+ * Resets the current reading of the Inertial Sensor's pitch to zero
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 345 1 358 4 18446744073709551615 7 int32_t 359 1 359 8 23 14 imu_tare_pitch 359 9 359 23 57 1 ( 359 23 359 24 57 7 uint8_t 359 24 359 31 25 4 port 359 32 359 36 58 1 ) 359 36 359 37 57 1 ; 359 37 359 38 18446744073709551615 516 /**
+ * Resets the current reading of the Inertial Sensor's roll to zero
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 361 1 374 4 18446744073709551615 7 int32_t 375 1 375 8 23 13 imu_tare_roll 375 9 375 22 59 1 ( 375 22 375 23 59 7 uint8_t 375 23 375 30 25 4 port 375 31 375 35 60 1 ) 375 35 375 36 59 1 ; 375 36 375 37 18446744073709551615 515 /**
+ * Resets the current reading of the Inertial Sensor's yaw to zero
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 377 1 390 4 18446744073709551615 7 int32_t 391 1 391 8 23 12 imu_tare_yaw 391 9 391 21 61 1 ( 391 21 391 22 61 7 uint8_t 391 22 391 29 25 4 port 391 30 391 34 62 1 ) 391 34 391 35 61 1 ; 391 35 391 36 18446744073709551615 505 /**
+ * Reset all 3 euler values of the Inertial Sensor to 0.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 393 1 406 4 18446744073709551615 7 int32_t 407 1 407 8 23 14 imu_tare_euler 407 9 407 23 63 1 ( 407 23 407 24 63 7 uint8_t 407 24 407 31 25 4 port 407 32 407 36 64 1 ) 407 36 407 37 63 1 ; 407 37 407 38 18446744073709551615 500 /**
+ * Resets all 5 values of the Inertial Sensor to 0.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 409 1 422 4 18446744073709551615 7 int32_t 423 1 423 8 23 8 imu_tare 423 9 423 17 65 1 ( 423 17 423 18 65 7 uint8_t 423 18 423 25 25 4 port 423 26 423 30 66 1 ) 423 30 423 31 65 1 ; 423 31 423 32 18446744073709551615 22 //Value set functions: 425 1 425 23 18446744073709551615 672 /**
+ * Sets the current reading of the Inertial Sensor's euler values to
+ * target euler values. Will default to +/- 180 if target exceeds +/- 180.
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \param  target
+ * 				 Target euler values for the euler values to be set to
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 426 1 442 4 18446744073709551615 7 int32_t 443 1 443 8 23 13 imu_set_euler 443 9 443 22 67 1 ( 443 22 443 23 67 7 uint8_t 443 23 443 30 25 4 port 443 31 443 35 68 1 , 443 35 443 36 67 9 euler_s_t 443 37 443 46 22 6 target 443 47 443 53 69 1 ) 443 53 443 54 67 1 ; 443 54 443 55 18446744073709551615 601 /**
+ * Sets the current reading of the Inertial Sensor's rotation to target value
+ *
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \param  target
+ * 				 Target value for the rotation value to be set to
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 445 1 460 4 18446744073709551615 7 int32_t 461 1 461 8 23 16 imu_set_rotation 461 9 461 25 70 1 ( 461 25 461 26 70 7 uint8_t 461 26 461 33 25 4 port 461 34 461 38 71 1 , 461 38 461 39 70 6 double 461 40 461 46 18446744073709551615 6 target 461 47 461 53 72 1 ) 461 53 461 54 70 1 ; 461 54 461 55 18446744073709551615 672 /**
+ * Sets the current reading of the Inertial Sensor's heading to target value
+ * Target will default to 360 if above 360 and default to 0 if below 0.
+ * 
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \param  target
+ * 				 Target value for the heading value to be set to
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 463 1 479 4 18446744073709551615 7 int32_t 480 1 480 8 23 15 imu_set_heading 480 9 480 24 73 1 ( 480 24 480 25 73 7 uint8_t 480 25 480 32 25 4 port 480 33 480 37 74 1 , 480 37 480 38 73 6 double 480 39 480 45 18446744073709551615 6 target 480 46 480 52 75 1 ) 480 52 480 53 73 1 ; 480 53 480 54 18446744073709551615 650 /**
+ * Sets the current reading of the Inertial Sensor's pitch to target value
+ * Will default to +/- 180 if target exceeds +/- 180.
+ * 
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \param  target
+ * 				 Target value for the pitch value to be set to
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 482 1 498 4 18446744073709551615 7 int32_t 499 1 499 8 23 13 imu_set_pitch 499 9 499 22 76 1 ( 499 22 499 23 76 7 uint8_t 499 23 499 30 25 4 port 499 31 499 35 77 1 , 499 35 499 36 76 6 double 499 37 499 43 18446744073709551615 6 target 499 44 499 50 78 1 ) 499 50 499 51 76 1 ; 499 51 499 52 18446744073709551615 648 /**
+ * Sets the current reading of the Inertial Sensor's roll to target value
+ * Will default to +/- 180 if target exceeds +/- 180.
+ * 
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \param  target
+ * 				 Target value for the roll value to be set to
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 501 1 517 4 18446744073709551615 7 int32_t 518 1 518 8 23 12 imu_set_roll 518 9 518 21 79 1 ( 518 21 518 22 79 7 uint8_t 518 22 518 29 25 4 port 518 30 518 34 80 1 , 518 34 518 35 79 6 double 518 36 518 42 18446744073709551615 6 target 518 43 518 49 81 1 ) 518 49 518 50 79 1 ; 518 50 518 51 18446744073709551615 646 /**
+ * Sets the current reading of the Inertial Sensor's yaw to target value
+ * Will default to +/- 180 if target exceeds +/- 180.
+ * 
+ * This function uses the following values of errno when an error state is
+ * reached:
+ * ENXIO - The given value is not within the range of V5 ports (1-21).
+ * ENODEV - The port cannot be configured as an Inertial Sensor
+ * EAGAIN - The sensor is still calibrating
+ *
+ * \param  port
+ * 				 The V5 Inertial Sensor port number from 1-21
+ * \param  target
+ * 				 Target value for the yaw value to be set to
+ * \return 1 if the operation was successful or PROS_ERR if the operation
+ * failed, setting errno.
+ */ 520 1 536 4 18446744073709551615 7 int32_t 537 1 537 8 23 11 imu_set_yaw 537 9 537 20 82 1 ( 537 20 537 21 82 7 uint8_t 537 21 537 28 25 4 port 537 29 537 33 83 1 , 537 33 537 34 82 6 double 537 35 537 41 18446744073709551615 6 target 537 42 537 48 84 1 ) 537 48 537 49 82 1 ; 537 49 537 50 18446744073709551615 1 # 539 1 539 2 18446744073709551615 5 ifdef 539 2 539 7 18446744073709551615 11 __cplusplus 539 8 539 19 18446744073709551615 1 } 540 1 540 2 18446744073709551615 1 } 541 1 541 2 18446744073709551615 1 } 542 1 542 2 18446744073709551615 1 # 543 1 543 2 18446744073709551615 5 endif 543 2 543 7 18446744073709551615 1 # 545 1 545 2 18446744073709551615 5 endif 545 2 545 7 18446744073709551615 0 0 85 0 0 0 22 0 0 1 13 0 4 pros 22 1 13 0 6 c:pros 5 1 13 0 19 imu_status_e:c:pros 7 1 13 0 44 E_IMU_STATUS_CALIBRATING:imu_status_e:c:pros 7 1 13 0 38 E_IMU_STATUS_ERROR:imu_status_e:c:pros 20 1 13 0 21 imu_status_e_t:c:pros 2 1 13 0 19 quaternion_s:c:pros 6 1 13 0 21 x:quaternion_s:c:pros 6 1 13 0 21 y:quaternion_s:c:pros 6 1 13 0 21 z:quaternion_s:c:pros 6 1 13 0 21 w:quaternion_s:c:pros 20 1 13 0 21 quaternion_s_t:c:pros 2 1 13 0 16 imu_raw_s:c:pros 6 1 13 0 18 x:imu_raw_s:c:pros 6 1 13 0 18 y:imu_raw_s:c:pros 6 1 13 0 18 z:imu_raw_s:c:pros 20 1 13 0 19 imu_gyro_s_t:c:pros 20 1 13 0 20 imu_accel_s_t:c:pros 2 1 13 0 14 euler_s:c:pros 6 1 13 0 20 pitch:euler_s:c:pros 6 1 13 0 19 roll:euler_s:c:pros 6 1 13 0 18 yaw:euler_s:c:pros 20 1 13 0 16 euler_s_t:c:pros 20 1 13 0 7 int32_t 8 1 13 0 16 imu_reset:c:pros 20 1 13 0 7 uint8_t 10 1 13 0 65 89:27:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 25 imu_reset_blocking:c:pros 10 1 13 0 66 111:36:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 24 imu_set_data_rate:c:pros 10 1 13 0 66 137:35:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 20 1 13 0 8 uint32_t 10 1 13 0 66 137:50:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 23 imu_get_rotation:c:pros 10 1 13 0 66 157:33:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 22 imu_get_heading:c:pros 10 1 13 0 66 178:32:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 25 imu_get_quaternion:c:pros 10 1 13 0 66 195:43:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 20 imu_get_euler:c:pros 10 1 13 0 66 212:33:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 20 imu_get_pitch:c:pros 10 1 13 0 66 228:30:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 19 imu_get_roll:c:pros 10 1 13 0 66 243:29:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 18 imu_get_yaw:c:pros 10 1 13 0 66 258:28:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 24 imu_get_gyro_rate:c:pros 10 1 13 0 66 274:40:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 20 imu_get_accel:c:pros 10 1 13 0 66 290:37:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 21 imu_get_status:c:pros 10 1 13 0 66 306:39:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 23 imu_tare_heading:c:pros 10 1 13 0 66 327:34:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 24 imu_tare_rotation:c:pros 10 1 13 0 66 343:35:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 21 imu_tare_pitch:c:pros 10 1 13 0 66 359:32:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 20 imu_tare_roll:c:pros 10 1 13 0 66 375:31:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 19 imu_tare_yaw:c:pros 10 1 13 0 66 391:30:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 21 imu_tare_euler:c:pros 10 1 13 0 66 407:32:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 15 imu_tare:c:pros 10 1 13 0 66 423:26:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 20 imu_set_euler:c:pros 10 1 13 0 66 443:31:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 10 1 13 0 66 443:47:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 23 imu_set_rotation:c:pros 10 1 13 0 66 461:34:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 10 1 13 0 66 461:47:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 22 imu_set_heading:c:pros 10 1 13 0 66 480:33:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 10 1 13 0 66 480:46:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 20 imu_set_pitch:c:pros 10 1 13 0 66 499:31:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 10 1 13 0 66 499:44:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 19 imu_set_roll:c:pros 10 1 13 0 66 518:30:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 10 1 13 0 66 518:43:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 8 1 13 0 18 imu_set_yaw:c:pros 10 1 13 0 66 537:29:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 10 1 13 0 66 537:42:/home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 0 0 1 0 0 0 59 /home/bluecore/Desktop/Pros/Main Project/include/pros/imu.h 1698321194

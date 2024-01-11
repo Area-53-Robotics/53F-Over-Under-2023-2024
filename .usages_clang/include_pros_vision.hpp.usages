@@ -1,0 +1,351 @@
+22 serialization::archive 19 0 0 0 0 40 /home/bluecore/Desktop/Pros/Main Project 40 /home/bluecore/Desktop/Pros/Main Project 0 0 454 0 0 0 611 /**
+ * \file pros/vision.hpp
+ *
+ * Contains prototypes for the VEX Vision Sensor-related functions in C++.
+ *
+ * Visit https://pros.cs.purdue.edu/v5/tutorials/topical/vision.html to learn
+ * more.
+ *
+ * This file should not be modified by users, since it gets replaced whenever
+ * a kernel upgrade occurs.
+ *
+ * \copyright Copyright (c) 2017-2023, Purdue University ACM SIGBots.
+ * All rights reserved.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */ 1 1 18 4 18446744073709551615 1 # 20 1 20 2 18446744073709551615 6 ifndef 20 2 20 8 18446744073709551615 17 _PROS_VISION_HPP_ 20 9 20 26 18446744073709551615 1 # 21 1 21 2 18446744073709551615 6 define 21 2 21 8 18446744073709551615 17 _PROS_VISION_HPP_ 21 9 21 26 18446744073709551615 1 # 23 1 23 2 18446744073709551615 7 include 23 2 23 9 18446744073709551615 15 "pros/vision.h" 23 10 23 25 18446744073709551615 1 # 25 1 25 2 18446744073709551615 7 include 25 2 25 9 18446744073709551615 1 < 25 10 25 11 18446744073709551615 7 cstdint 25 11 25 18 18446744073709551615 1 > 25 18 25 19 18446744073709551615 9 namespace 27 1 27 10 18446744073709551615 4 pros 27 11 27 15 0 1 { 27 16 27 17 18446744073709551615 5 class 28 1 28 6 18446744073709551615 6 Vision 28 7 28 13 1 1 { 28 14 28 15 18446744073709551615 6 public 29 2 29 8 18446744073709551615 1 : 29 8 29 9 18446744073709551615 444 /**
+	 * Create a Vision Sensor object on the given port.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENXIO - The given value is not within the range of V5 ports (1-21).
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 *
+	 * \param port
+	 *        The V5 port number from 1-21
+	 * \param zero_point
+	 *        One of vision_zero_e_t to set the (0,0) coordinate for the FOV
+	 */ 30 2 42 5 18446744073709551615 6 Vision 43 2 43 8 1 1 ( 43 8 43 9 1 3 std 43 9 43 12 2 2 :: 43 12 43 14 18446744073709551615 7 uint8_t 43 14 43 21 3 4 port 43 22 43 26 3 1 , 43 26 43 27 1 15 vision_zero_e_t 43 28 43 43 4 10 zero_point 43 44 43 54 5 1 = 43 55 43 56 18446744073709551615 21 E_VISION_ZERO_TOPLEFT 43 57 43 78 6 1 ) 43 78 43 79 1 1 ; 43 79 43 80 18446744073709551615 409 /**
+	 * Clears the vision sensor LED color, reseting it back to its default
+	 * behavior, displaying the most prominent object signature color.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 *
+	 * \return 1 if the operation was successful or PROS_ERR if the operation
+	 * failed, setting errno.
+	 */ 45 2 55 5 18446744073709551615 3 std 56 2 56 5 2 2 :: 56 5 56 7 7 7 int32_t 56 7 56 14 7 9 clear_led 56 15 56 24 7 1 ( 56 24 56 25 7 4 void 56 25 56 29 18446744073709551615 1 ) 56 29 56 30 7 5 const 56 31 56 36 18446744073709551615 1 ; 56 36 56 37 18446744073709551615 581 /**
+	 * Creates a signature from the vision sensor utility
+	 *
+	 * \param id
+	 *        The signature ID
+	 * \param u_min
+	 *        Minimum value on U axis
+	 * \param u_max
+	 *        Maximum value on U axis
+	 * \param u_mean
+	 *        Mean value on U axis
+	 * \param v_min
+	 *        Minimum value on V axis
+	 * \param v_max
+	 *        Maximum value on V axis
+	 * \param v_mean
+	 *        Mean value on V axis
+	 * \param rgb
+	 *        Scale factor
+	 * \param type
+	 *        Signature type
+	 *
+	 * \return A vision_signature_s_t that can be set using Vision::set_signature
+	 */ 58 2 81 5 18446744073709551615 6 static 82 2 82 8 18446744073709551615 20 vision_signature_s_t 82 9 82 29 8 22 signature_from_utility 82 30 82 52 9 1 ( 82 52 82 53 9 5 const 82 53 82 58 18446744073709551615 3 std 82 59 82 62 2 2 :: 82 62 82 64 18446744073709551615 7 int32_t 82 64 82 71 10 2 id 82 72 82 74 10 1 , 82 74 82 75 9 5 const 82 76 82 81 18446744073709551615 3 std 82 82 82 85 2 2 :: 82 85 82 87 18446744073709551615 7 int32_t 82 87 82 94 11 5 u_min 82 95 82 100 11 1 , 82 100 82 101 9 5 const 83 53 83 58 18446744073709551615 3 std 83 59 83 62 2 2 :: 83 62 83 64 18446744073709551615 7 int32_t 83 64 83 71 12 5 u_max 83 72 83 77 12 1 , 83 77 83 78 9 5 const 83 79 83 84 18446744073709551615 3 std 83 85 83 88 2 2 :: 83 88 83 90 18446744073709551615 7 int32_t 83 90 83 97 13 6 u_mean 83 98 83 104 13 1 , 83 104 83 105 9 5 const 84 53 84 58 18446744073709551615 3 std 84 59 84 62 2 2 :: 84 62 84 64 18446744073709551615 7 int32_t 84 64 84 71 14 5 v_min 84 72 84 77 14 1 , 84 77 84 78 9 5 const 84 79 84 84 18446744073709551615 3 std 84 85 84 88 2 2 :: 84 88 84 90 18446744073709551615 7 int32_t 84 90 84 97 15 5 v_max 84 98 84 103 15 1 , 84 103 84 104 9 5 const 85 53 85 58 18446744073709551615 3 std 85 59 85 62 2 2 :: 85 62 85 64 18446744073709551615 7 int32_t 85 64 85 71 16 6 v_mean 85 72 85 78 16 1 , 85 78 85 79 9 5 const 85 80 85 85 18446744073709551615 5 float 85 86 85 91 18446744073709551615 5 range 85 92 85 97 17 1 , 85 97 85 98 9 5 const 86 53 86 58 18446744073709551615 3 std 86 59 86 62 2 2 :: 86 62 86 64 18446744073709551615 7 int32_t 86 64 86 71 18 4 type 86 72 86 76 18 1 ) 86 76 86 77 9 1 ; 86 77 86 78 18446744073709551615 841 /**
+	 * Creates a color code that represents a combination of the given signature
+	 * IDs.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * EINVAL - Fewer than two signatures have been provided or one of the
+	 *          signatures is out of its [1-7] range (or 0 when omitted).
+	 *
+	 * \param sig_id1
+	 *        The first signature id [1-7] to add to the color code
+	 * \param sig_id2
+	 *        The second signature id [1-7] to add to the color code
+	 * \param sig_id3
+	 *        The third signature id [1-7] to add to the color code
+	 * \param sig_id4
+	 *        The fourth signature id [1-7] to add to the color code
+	 * \param sig_id5
+	 *        The fifth signature id [1-7] to add to the color code
+	 *
+	 * \return A vision_color_code_t object containing the color code information.
+	 */ 88 2 109 5 18446744073709551615 19 vision_color_code_t 110 2 110 21 19 17 create_color_code 110 22 110 39 20 1 ( 110 39 110 40 20 5 const 110 40 110 45 18446744073709551615 3 std 110 46 110 49 2 2 :: 110 49 110 51 18446744073709551615 8 uint32_t 110 51 110 59 21 7 sig_id1 110 60 110 67 21 1 , 110 67 110 68 20 5 const 110 69 110 74 18446744073709551615 3 std 110 75 110 78 2 2 :: 110 78 110 80 18446744073709551615 8 uint32_t 110 80 110 88 22 7 sig_id2 110 89 110 96 22 1 , 110 96 110 97 20 5 const 111 40 111 45 18446744073709551615 3 std 111 46 111 49 2 2 :: 111 49 111 51 18446744073709551615 8 uint32_t 111 51 111 59 23 7 sig_id3 111 60 111 67 23 1 = 111 68 111 69 18446744073709551615 1 0 111 70 111 71 18446744073709551615 1 , 111 71 111 72 20 5 const 111 73 111 78 18446744073709551615 3 std 111 79 111 82 2 2 :: 111 82 111 84 18446744073709551615 8 uint32_t 111 84 111 92 24 7 sig_id4 111 93 111 100 24 1 = 111 101 111 102 18446744073709551615 1 0 111 103 111 104 18446744073709551615 1 , 111 104 111 105 20 5 const 112 40 112 45 18446744073709551615 3 std 112 46 112 49 2 2 :: 112 49 112 51 18446744073709551615 8 uint32_t 112 51 112 59 25 7 sig_id5 112 60 112 67 25 1 = 112 68 112 69 18446744073709551615 1 0 112 70 112 71 18446744073709551615 1 ) 112 71 112 72 20 5 const 112 73 112 78 18446744073709551615 1 ; 112 78 112 79 18446744073709551615 635 /**
+	 * Gets the nth largest object according to size_id.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 * EDOM - size_id is greater than the number of available objects.
+	 * EAGAIN - Reading the vision sensor failed for an unknown reason.
+	 *
+	 * \param size_id
+	 *        The object to read from a list roughly ordered by object size
+	 *        (0 is the largest item, 1 is the second largest, etc.)
+	 *
+	 * \return The vision_object_s_t object corresponding to the given size id, or
+	 * PROS_ERR if an error occurred.
+	 */ 114 2 129 5 18446744073709551615 17 vision_object_s_t 130 2 130 19 26 11 get_by_size 130 20 130 31 27 1 ( 130 31 130 32 27 5 const 130 32 130 37 18446744073709551615 3 std 130 38 130 41 2 2 :: 130 41 130 43 18446744073709551615 8 uint32_t 130 43 130 51 28 7 size_id 130 52 130 59 28 1 ) 130 59 130 60 27 5 const 130 61 130 66 18446744073709551615 1 ; 130 66 130 67 18446744073709551615 835 /**
+	 * Gets the nth largest object of the given signature according to size_id.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 * EDOM - size_id is greater than the number of available objects.
+	 * EINVAL - sig_id is outside the range [1-8]
+	 * EAGAIN - Reading the vision sensor failed for an unknown reason.
+	 *
+	 * \param size_id
+	 *        The object to read from a list roughly ordered by object size
+	 *        (0 is the largest item, 1 is the second largest, etc.)
+	 * \param signature
+	 *        The vision_signature_s_t signature for which an object will be
+	 *        returned.
+	 *
+	 * \return The vision_object_s_t object corresponding to the given signature
+	 * and size_id, or PROS_ERR if an error occurred.
+	 */ 132 2 151 5 18446744073709551615 17 vision_object_s_t 152 2 152 19 26 10 get_by_sig 152 20 152 30 29 1 ( 152 30 152 31 29 5 const 152 31 152 36 18446744073709551615 3 std 152 37 152 40 2 2 :: 152 40 152 42 18446744073709551615 8 uint32_t 152 42 152 50 30 7 size_id 152 51 152 58 30 1 , 152 58 152 59 29 5 const 152 60 152 65 18446744073709551615 3 std 152 66 152 69 2 2 :: 152 69 152 71 18446744073709551615 8 uint32_t 152 71 152 79 31 6 sig_id 152 80 152 86 31 1 ) 152 86 152 87 29 5 const 152 88 152 93 18446744073709551615 1 ; 152 93 152 94 18446744073709551615 700 /**
+	 * Gets the nth largest object of the given color code according to size_id.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 * EAGAIN - Reading the Vision Sensor failed for an unknown reason.
+	 *
+	 * \param size_id
+	 *        The object to read from a list roughly ordered by object size
+	 *        (0 is the largest item, 1 is the second largest, etc.)
+	 * \param color_code
+	 *        The vision_color_code_t for which an object will be returned
+	 *
+	 * \return The vision_object_s_t object corresponding to the given color code
+	 * and size_id, or PROS_ERR if an error occurred.
+	 */ 154 2 170 5 18446744073709551615 17 vision_object_s_t 171 2 171 19 26 11 get_by_code 171 20 171 31 32 1 ( 171 31 171 32 32 5 const 171 32 171 37 18446744073709551615 3 std 171 38 171 41 2 2 :: 171 41 171 43 18446744073709551615 8 uint32_t 171 43 171 51 33 7 size_id 171 52 171 59 33 1 , 171 59 171 60 32 5 const 171 61 171 66 18446744073709551615 19 vision_color_code_t 171 67 171 86 19 10 color_code 171 87 171 97 34 1 ) 171 97 171 98 32 5 const 171 99 171 104 18446744073709551615 1 ; 171 104 171 105 18446744073709551615 419 /**
+	 * Gets the exposure parameter of the Vision Sensor. See
+	 * https://pros.cs.purdue.edu/v5/tutorials/topical/vision.html#exposure-setting
+	 * for more detials.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 *
+	 * \return The current exposure parameter from [0,150],
+	 * PROS_ERR if an error occurred
+	 */ 173 2 184 5 18446744073709551615 3 std 185 2 185 5 2 2 :: 185 5 185 7 35 7 int32_t 185 7 185 14 35 12 get_exposure 185 15 185 27 35 1 ( 185 27 185 28 35 4 void 185 28 185 32 18446744073709551615 1 ) 185 32 185 33 35 5 const 185 34 185 39 18446744073709551615 1 ; 185 39 185 40 18446744073709551615 381 /**
+	 * Gets the number of objects currently detected by the Vision Sensor.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 *
+	 * \return The number of objects detected on the specified vision sensor.
+	 * Returns PROS_ERR if the port was invalid or an error occurred.
+	 */ 187 2 196 5 18446744073709551615 3 std 197 2 197 5 2 2 :: 197 5 197 7 36 7 int32_t 197 7 197 14 36 16 get_object_count 197 15 197 31 36 1 ( 197 31 197 32 36 4 void 197 32 197 36 18446744073709551615 1 ) 197 36 197 37 36 5 const 197 38 197 43 18446744073709551615 1 ; 197 43 197 44 18446744073709551615 376 /**
+	 * Gets the object detection signature with the given id number.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 *
+	 * \param signature_id
+	 *        The signature id to read
+	 *
+	 * \return A vision_signature_s_t containing information about the signature.
+	 */ 199 2 210 5 18446744073709551615 20 vision_signature_s_t 211 2 211 22 8 13 get_signature 211 23 211 36 37 1 ( 211 36 211 37 37 5 const 211 37 211 42 18446744073709551615 3 std 211 43 211 46 2 2 :: 211 46 211 48 18446744073709551615 7 uint8_t 211 48 211 55 38 12 signature_id 211 56 211 68 38 1 ) 211 68 211 69 37 5 const 211 70 211 75 18446744073709551615 1 ; 211 75 211 76 18446744073709551615 289 /**
+	 * Get the white balance parameter of the Vision Sensor.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 *
+	 * \return The current RGB white balance setting of the sensor
+	 */ 213 2 221 5 18446744073709551615 3 std 222 2 222 5 2 2 :: 222 5 222 7 39 7 int32_t 222 7 222 14 39 17 get_white_balance 222 15 222 32 39 1 ( 222 32 222 33 39 4 void 222 33 222 37 18446744073709551615 1 ) 222 37 222 38 39 5 const 222 39 222 44 18446744073709551615 1 ; 222 44 222 45 18446744073709551615 104 /**
+	 * Gets the port number of the Vision Sensor.
+	 *
+	 * \return The vision sensor's port number.
+	 */ 224 2 228 5 18446744073709551615 3 std 229 2 229 5 2 2 :: 229 5 229 7 40 7 uint8_t 229 7 229 14 40 8 get_port 229 15 229 23 40 1 ( 229 23 229 24 40 4 void 229 24 229 28 18446744073709551615 1 ) 229 28 229 29 40 5 const 229 30 229 35 18446744073709551615 1 ; 229 35 229 36 18446744073709551615 1044 /**
+	 * Reads up to object_count object descriptors into object_arr.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 * EDOM - size_id is greater than the number of available objects.
+	 * EAGAIN - Reading the vision sensor failed for an unknown reason.
+	 *
+	 * \param size_id
+	 *        The object to read from a list roughly ordered by object size
+	 *        (0 is the largest item, 1 is the second largest, etc.)
+	 * \param object_count
+	 *        The number of objects to read
+	 * \param[out] object_arr
+	 *             A pointer to copy the objects into
+	 *
+	 * \return The number of object signatures copied. This number will be less than
+	 * object_count if there are fewer objects detected by the vision sensor.
+	 * Returns PROS_ERR if the port was invalid, an error occurred, or fewer objects
+	 * than size_id were found. All objects in object_arr that were not found are
+	 * given VISION_OBJECT_ERR_SIG as their signature.
+	 */ 231 2 253 5 18446744073709551615 3 std 254 2 254 5 2 2 :: 254 5 254 7 41 7 int32_t 254 7 254 14 41 12 read_by_size 254 15 254 27 41 1 ( 254 27 254 28 41 5 const 254 28 254 33 18446744073709551615 3 std 254 34 254 37 2 2 :: 254 37 254 39 18446744073709551615 8 uint32_t 254 39 254 47 42 7 size_id 254 48 254 55 42 1 , 254 55 254 56 41 5 const 254 57 254 62 18446744073709551615 3 std 254 63 254 66 2 2 :: 254 66 254 68 18446744073709551615 8 uint32_t 254 68 254 76 43 12 object_count 254 77 254 89 43 1 , 254 89 254 90 41 17 vision_object_s_t 255 28 255 45 26 1 * 255 45 255 46 18446744073709551615 5 const 255 47 255 52 18446744073709551615 10 object_arr 255 53 255 63 44 1 ) 255 63 255 64 41 5 const 255 65 255 70 18446744073709551615 1 ; 255 70 255 71 18446744073709551615 1207 /**
+	 * Reads up to object_count object descriptors into object_arr.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 * EDOM - size_id is greater than the number of available objects.
+	 * EINVAL - sig_id is outside the range [1-8]
+	 * EAGAIN - Reading the vision sensor failed for an unknown reason.
+	 *
+	 * \param object_count
+	 *        The number of objects to read
+	 * \param size_id
+	 *        The object to read from a list roughly ordered by object size
+	 *        (0 is the largest item, 1 is the second largest, etc.)
+	 * \param signature
+	 *        The vision_signature_s_t signature for which an object will be
+	 *        returned.
+	 * \param[out] object_arr
+	 *             A pointer to copy the objects into
+	 *
+	 * \return The number of object signatures copied. This number will be less than
+	 * object_count if there are fewer objects detected by the vision sensor.
+	 * Returns PROS_ERR if the port was invalid, an error occurred, or fewer objects
+	 * than size_id were found. All objects in object_arr that were not found are
+	 * given VISION_OBJECT_ERR_SIG as their signature.
+	 */ 257 2 283 5 18446744073709551615 3 std 284 2 284 5 2 2 :: 284 5 284 7 45 7 int32_t 284 7 284 14 45 11 read_by_sig 284 15 284 26 45 1 ( 284 26 284 27 45 5 const 284 27 284 32 18446744073709551615 3 std 284 33 284 36 2 2 :: 284 36 284 38 18446744073709551615 8 uint32_t 284 38 284 46 46 7 size_id 284 47 284 54 46 1 , 284 54 284 55 45 5 const 284 56 284 61 18446744073709551615 3 std 284 62 284 65 2 2 :: 284 65 284 67 18446744073709551615 8 uint32_t 284 67 284 75 47 6 sig_id 284 76 284 82 47 1 , 284 82 284 83 45 5 const 284 84 284 89 18446744073709551615 3 std 284 90 284 93 2 2 :: 284 93 284 95 18446744073709551615 8 uint32_t 284 95 284 103 48 12 object_count 284 104 284 116 48 1 , 284 116 284 117 45 17 vision_object_s_t 285 27 285 44 26 1 * 285 44 285 45 18446744073709551615 5 const 285 46 285 51 18446744073709551615 10 object_arr 285 52 285 62 49 1 ) 285 62 285 63 45 5 const 285 64 285 69 18446744073709551615 1 ; 285 69 285 70 18446744073709551615 1136 /**
+	 * Reads up to object_count object descriptors into object_arr.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * EDOM - size_id is greater than the number of available objects.
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 * EAGAIN - Reading the vision sensor failed for an unknown reason.
+	 *
+	 * \param object_count
+	 *        The number of objects to read
+	 * \param size_id
+	 *        The object to read from a list roughly ordered by object size
+	 *        (0 is the largest item, 1 is the second largest, etc.)
+	 * \param color_code
+	 *        The vision_color_code_t for which objects will be returned
+	 * \param[out] object_arr
+	 *             A pointer to copy the objects into
+	 *
+	 * \return The number of object signatures copied. This number will be less than
+	 * object_count if there are fewer objects detected by the vision sensor.
+	 * Returns PROS_ERR if the port was invalid, an error occurred, or fewer objects
+	 * than size_id were found. All objects in object_arr that were not found are
+	 * given VISION_OBJECT_ERR_SIG as their signature.
+	 */ 287 2 311 5 18446744073709551615 7 int32_t 312 2 312 9 50 12 read_by_code 312 10 312 22 51 1 ( 312 22 312 23 51 5 const 312 23 312 28 18446744073709551615 3 std 312 29 312 32 2 2 :: 312 32 312 34 18446744073709551615 8 uint32_t 312 34 312 42 52 7 size_id 312 43 312 50 52 1 , 312 50 312 51 51 5 const 312 52 312 57 18446744073709551615 19 vision_color_code_t 312 58 312 77 19 10 color_code 312 78 312 88 53 1 , 312 88 312 89 51 5 const 313 23 313 28 18446744073709551615 3 std 313 29 313 32 2 2 :: 313 32 313 34 18446744073709551615 8 uint32_t 313 34 313 42 54 12 object_count 313 43 313 55 54 1 , 313 55 313 56 51 17 vision_object_s_t 313 57 313 74 26 1 * 313 74 313 75 18446744073709551615 5 const 313 76 313 81 18446744073709551615 10 object_arr 313 82 313 92 55 1 ) 313 92 313 93 51 5 const 313 94 313 99 18446744073709551615 1 ; 313 99 313 100 18446744073709551615 231 /**
+	 * Prints the contents of the signature as an initializer list to the terminal.
+	 *
+	 * \param sig
+	 *        The signature for which the contents will be printed
+	 *
+	 * \return 1 if no errors occured, PROS_ERR otherwise
+	 */ 315 2 322 5 18446744073709551615 6 static 323 2 323 8 18446744073709551615 3 std 323 9 323 12 2 2 :: 323 12 323 14 56 7 int32_t 323 14 323 21 56 15 print_signature 323 22 323 37 56 1 ( 323 37 323 38 56 5 const 323 38 323 43 18446744073709551615 20 vision_signature_s_t 323 44 323 64 8 3 sig 323 65 323 68 57 1 ) 323 68 323 69 56 1 ; 323 69 323 70 18446744073709551615 397 /**
+	 * Enables/disables auto white-balancing on the Vision Sensor.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 *
+	 * \param enabled
+	 * 		    Pass 0 to disable, 1 to enable
+	 *
+	 * \return 1 if the operation was successful or PROS_ERR if the operation
+	 * failed, setting errno.
+	 */ 325 2 337 5 18446744073709551615 3 std 338 2 338 5 2 2 :: 338 5 338 7 58 7 int32_t 338 7 338 14 58 22 set_auto_white_balance 338 15 338 37 58 1 ( 338 37 338 38 58 5 const 338 38 338 43 18446744073709551615 3 std 338 44 338 47 2 2 :: 338 47 338 49 18446744073709551615 7 uint8_t 338 49 338 56 59 6 enable 338 57 338 63 59 1 ) 338 63 338 64 58 5 const 338 65 338 70 18446744073709551615 1 ; 338 70 338 71 18446744073709551615 503 /**
+	 * Sets the exposure parameter of the Vision Sensor. See
+	 * https://pros.cs.purdue.edu/v5/tutorials/topical/vision.html#exposure-setting
+	 * for more detials.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 *
+	 * \param percent
+	 *        The new exposure setting from [0,150].
+	 *
+	 * \return 1 if the operation was successful or PROS_ERR if the operation
+	 * failed, setting errno.
+	 */ 340 2 354 5 18446744073709551615 3 std 355 2 355 5 2 2 :: 355 5 355 7 60 7 int32_t 355 7 355 14 60 12 set_exposure 355 15 355 27 60 1 ( 355 27 355 28 60 5 const 355 28 355 33 18446744073709551615 3 std 355 34 355 37 2 2 :: 355 37 355 39 18446744073709551615 7 uint8_t 355 39 355 46 61 8 exposure 355 47 355 55 61 1 ) 355 55 355 56 60 5 const 355 57 355 62 18446744073709551615 1 ; 355 62 355 63 18446744073709551615 402 /**
+	 * Sets the vision sensor LED color, overriding the automatic behavior.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 *
+	 * \param rgb
+	 *        An RGB code to set the LED to
+	 *
+	 * \return 1 if the operation was successful or PROS_ERR if the operation
+	 * failed, setting errno.
+	 */ 357 2 369 5 18446744073709551615 3 std 370 2 370 5 2 2 :: 370 5 370 7 62 7 int32_t 370 7 370 14 62 7 set_led 370 15 370 22 62 1 ( 370 22 370 23 62 5 const 370 23 370 28 18446744073709551615 3 std 370 29 370 32 2 2 :: 370 32 370 34 18446744073709551615 7 int32_t 370 34 370 41 63 3 rgb 370 42 370 45 63 1 ) 370 45 370 46 62 5 const 370 47 370 52 18446744073709551615 1 ; 370 52 370 53 18446744073709551615 626 /**
+	 * Stores the supplied object detection signature onto the vision sensor.
+	 *
+	 * NOTE: This saves the signature in volatile memory, and the signature will be
+	 * lost as soon as the sensor is powered down.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 * EINVAL - sig_id is outside the range [1-8]
+	 *
+	 * \param signature_id
+	 *        The signature id to store into
+	 * \param[in] signature_ptr
+	 *            A pointer to the signature to save
+	 *
+	 * \return 1 if no errors occured, PROS_ERR otherwise
+	 */ 372 2 389 5 18446744073709551615 3 std 390 2 390 5 2 2 :: 390 5 390 7 64 7 int32_t 390 7 390 14 64 13 set_signature 390 15 390 28 64 1 ( 390 28 390 29 64 5 const 390 29 390 34 18446744073709551615 3 std 390 35 390 38 2 2 :: 390 38 390 40 18446744073709551615 7 uint8_t 390 40 390 47 65 12 signature_id 390 48 390 60 65 1 , 390 60 390 61 64 20 vision_signature_s_t 390 62 390 82 8 1 * 390 82 390 83 18446744073709551615 5 const 390 84 390 89 18446744073709551615 13 signature_ptr 390 90 390 103 66 1 ) 390 103 390 104 64 5 const 390 105 390 110 18446744073709551615 1 ; 390 110 390 111 18446744073709551615 406 /**
+	 * Sets the white balance parameter of the Vision Sensor.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 *
+	 * \param rgb
+	 *        The new RGB white balance setting of the sensor
+	 *
+	 * \return 1 if the operation was successful or PROS_ERR if the operation
+	 * failed, setting errno.
+	 */ 392 2 404 5 18446744073709551615 3 std 405 2 405 5 2 2 :: 405 5 405 7 67 7 int32_t 405 7 405 14 67 17 set_white_balance 405 15 405 32 67 1 ( 405 32 405 33 67 5 const 405 33 405 38 18446744073709551615 3 std 405 39 405 42 2 2 :: 405 42 405 44 18446744073709551615 7 int32_t 405 44 405 51 68 3 rgb 405 52 405 55 68 1 ) 405 55 405 56 67 5 const 405 57 405 62 18446744073709551615 1 ; 405 62 405 63 18446744073709551615 644 /**
+	 * Sets the (0,0) coordinate for the Field of View.
+	 *
+	 * This will affect the coordinates returned for each request for a
+	 * vision_object_s_t from the sensor, so it is recommended that this function
+	 * only be used to configure the sensor at the beginning of its use.
+	 *
+	 * This function uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 *
+	 * \param zero_point
+	 *        One of vision_zero_e_t to set the (0,0) coordinate for the FOV
+	 *
+	 * \return 1 if the operation was successful or PROS_ERR if the operation
+	 * failed, setting errno.
+	 */ 407 2 423 5 18446744073709551615 3 std 424 2 424 5 2 2 :: 424 5 424 7 69 7 int32_t 424 7 424 14 69 14 set_zero_point 424 15 424 29 69 1 ( 424 29 424 30 69 15 vision_zero_e_t 424 30 424 45 4 10 zero_point 424 46 424 56 70 1 ) 424 56 424 57 69 5 const 424 58 424 63 18446744073709551615 1 ; 424 63 424 64 18446744073709551615 415 /**
+	 * Sets the Wi-Fi mode of the Vision sensor
+	 *
+	 * This functions uses the following values of errno when an error state is
+	 * reached:
+	 * ENODEV - The port cannot be configured as a vision sensor
+	 *
+	 * \param enable
+	 *        Disable Wi-Fi on the Vision sensor if 0, enable otherwise (e.g. 1)
+	 *
+	 * \return 1 if the operation was successful or PROS_ERR if the operation
+	 * failed, setting errno.
+	 */ 426 2 438 5 18446744073709551615 3 std 439 2 439 5 2 2 :: 439 5 439 7 71 7 int32_t 439 7 439 14 71 13 set_wifi_mode 439 15 439 28 71 1 ( 439 28 439 29 71 5 const 439 29 439 34 18446744073709551615 3 std 439 35 439 38 2 2 :: 439 38 439 40 18446744073709551615 7 uint8_t 439 40 439 47 72 6 enable 439 48 439 54 72 1 ) 439 54 439 55 71 5 const 439 56 439 61 18446744073709551615 1 ; 439 61 439 62 18446744073709551615 7 private 441 2 441 9 18446744073709551615 1 : 441 9 441 10 18446744073709551615 3 std 442 2 442 5 2 2 :: 442 5 442 7 18446744073709551615 7 uint8_t 442 7 442 14 73 5 _port 442 15 442 20 73 1 ; 442 20 442 21 18446744073709551615 1 } 443 1 443 2 18446744073709551615 1 ; 443 2 443 3 18446744073709551615 1 } 444 1 444 2 18446744073709551615 17 // namespace pros 444 4 444 21 18446744073709551615 1 # 445 1 445 2 18446744073709551615 5 endif 445 2 445 7 18446744073709551615 20 // _PROS_VISION_HPP_ 445 9 445 29 18446744073709551615 0 0 74 0 0 0 22 0 0 1 13 0 4 pros 4 1 13 0 11 Vision:pros 22 1 13 0 3 std 10 1 13 0 70 43:22:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 20 1 13 0 20 vision_zero_e_t:pros 10 1 13 0 70 43:44:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 7 1 13 0 38 E_VISION_ZERO_TOPLEFT:vision_zero:pros 21 1 13 0 21 clear_led:Vision:pros 20 1 13 0 25 vision_signature_s_t:pros 21 1 13 0 34 signature_from_utility:Vision:pros 10 1 13 0 70 82:72:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 70 82:95:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 70 83:72:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 70 83:98:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 70 84:72:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 70 84:98:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 70 85:72:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 70 85:92:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 70 86:72:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 20 1 13 0 24 vision_color_code_t:pros 21 1 13 0 29 create_color_code:Vision:pros 10 1 13 0 71 110:60:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 71 110:89:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 71 111:60:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 71 111:93:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 71 112:60:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 20 1 13 0 22 vision_object_s_t:pros 21 1 13 0 23 get_by_size:Vision:pros 10 1 13 0 71 130:52:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 21 1 13 0 22 get_by_sig:Vision:pros 10 1 13 0 71 152:51:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 71 152:80:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 21 1 13 0 23 get_by_code:Vision:pros 10 1 13 0 71 171:52:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 71 171:87:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 21 1 13 0 24 get_exposure:Vision:pros 21 1 13 0 28 get_object_count:Vision:pros 21 1 13 0 25 get_signature:Vision:pros 10 1 13 0 71 211:56:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 21 1 13 0 29 get_white_balance:Vision:pros 21 1 13 0 20 get_port:Vision:pros 21 1 13 0 24 read_by_size:Vision:pros 10 1 13 0 71 254:48:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 71 254:77:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 71 255:53:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 21 1 13 0 23 read_by_sig:Vision:pros 10 1 13 0 71 284:47:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 71 284:76:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 72 284:104:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 71 285:52:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 20 1 13 0 7 int32_t 21 1 13 0 24 read_by_code:Vision:pros 10 1 13 0 71 312:43:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 71 312:78:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 71 313:43:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 71 313:82:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 21 1 13 0 27 print_signature:Vision:pros 10 1 13 0 71 323:65:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 21 1 13 0 34 set_auto_white_balance:Vision:pros 10 1 13 0 71 338:57:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 21 1 13 0 24 set_exposure:Vision:pros 10 1 13 0 71 355:47:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 21 1 13 0 19 set_led:Vision:pros 10 1 13 0 71 370:42:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 21 1 13 0 25 set_signature:Vision:pros 10 1 13 0 71 390:48:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 10 1 13 0 71 390:90:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 21 1 13 0 29 set_white_balance:Vision:pros 10 1 13 0 71 405:52:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 21 1 13 0 26 set_zero_point:Vision:pros 10 1 13 0 71 424:46:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 21 1 13 0 25 set_wifi_mode:Vision:pros 10 1 13 0 71 439:48:/home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 6 1 13 0 17 _port:Vision:pros 0 0 1 0 0 0 64 /home/bluecore/Desktop/Pros/Main Project/include/pros/vision.hpp 1698321194
