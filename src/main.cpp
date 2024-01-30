@@ -26,18 +26,25 @@ void initialize() {
 void opcontrol() {
 //Variables
   pros::Controller master(pros::E_CONTROLLER_MASTER);
+  
   pros::Motor_Group LDriveTrain ({-19, -20, -6});
   pros::Motor_Group RDriveTrain ({8, 9, 10});
-
   bool toggleDrive = false;
+  
   int toggleIntake = 0;
   int toggleOuttake = 0;
-  pros::Motor Cata(7);
-  Cata.move(0);
   pros::Motor InTake(2);
 
-  while (true) {
+  pros::Motor FWheel(7);
+  FWheel.move(0);
+  bool FWheel_toggle = false;
 
+  pros::ADIDigitalOut leftWing('A');
+  pros::ADIDigitalOut rightWing('H');
+  bool leftWing_State = false;
+  bool rightWing_State = false;
+
+while (true) {
 //Drive toggle switch
     if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B)) {
       toggleDrive = !toggleDrive;
@@ -52,7 +59,7 @@ void opcontrol() {
       LDriveTrain.move(-master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
    }
 
-//Intake (not main funtion)
+//Intake (controller button funtion)
     if (master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R1)) {
       toggleOuttake = 0;
       toggleIntake++;
@@ -61,14 +68,18 @@ void opcontrol() {
       toggleOuttake++;
     }
 
-//Cata
+//Fly wheel
     if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
-      Cata.move(127);
-    }else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
-      Cata.move(-127);
+      FWheel_toggle = !FWheel_toggle;
     }
 
-//Main function for intake (toggle)
+    if (FWheel_toggle == true) {
+      FWheel.move(127);
+    }else if(FWheel_toggle == false) {
+      FWheel.move(0);
+    }
+
+//Intake (toggle funtion)
    if (toggleIntake == 1) {
       toggleOuttake = 0;
       InTake.move(-127);
@@ -85,6 +96,28 @@ void opcontrol() {
       toggleIntake = 1;
     }else {
       InTake.move(0);
+    }
+
+  //Wings 
+    if (master.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT)) {
+      leftWing_State = !leftWing_State;
+    }else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+      rightWing_State = !rightWing_State;
+    }else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+      leftWing_State = !leftWing_State;
+      rightWing_State = !rightWing_State;
+    }
+
+    if (leftWing_State == true) {
+      leftWing.set_value(HIGH);
+    }else if (leftWing_State == false) {
+      leftWing.set_value(LOW);
+    }
+
+    if (rightWing_State == true) {
+      rightWing.set_value(HIGH);
+    }else if (rightWing_State == false) {
+      rightWing.set_value(LOW);
     }
 
 		pros::delay(10);
