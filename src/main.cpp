@@ -120,7 +120,6 @@ while (true) {
       rightWing.set_value(LOW);
     }
 
-		pros::delay(10);
-
+    pros::delay(10);
   }
 }
