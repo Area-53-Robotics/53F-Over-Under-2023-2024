@@ -27,15 +27,15 @@ void opcontrol() {
 //Variables
   pros::Controller master(pros::E_CONTROLLER_MASTER);
   
-  pros::Motor_Group LDriveTrain ({-19, -20, -6});
-  pros::Motor_Group RDriveTrain ({8, 9, 10});
+  pros::Motor_Group LDriveTrain ({-9, -3, -11});
+  pros::Motor_Group RDriveTrain ({1, 19, 20});
   bool toggleDrive = false;
   
   int toggleIntake = 0;
   int toggleOuttake = 0;
-  pros::Motor InTake(2);
+  pros::Motor InTake(14);
 
-  pros::Motor FWheel(7);
+  pros::Motor FWheel(15);
   FWheel.move(0);
   bool FWheel_toggle = false;
 
