@@ -23,7 +23,6 @@ void initialize() {
 
 //------------------------------------------------------//
 
-void opcontrol() {
 //Variables
   pros::Controller master(pros::E_CONTROLLER_MASTER);
   
@@ -36,13 +35,122 @@ void opcontrol() {
   pros::Motor InTake(14);
 
   pros::Motor FWheel(15);
-  FWheel.move(0);
   bool FWheel_toggle = false;
 
   pros::ADIDigitalOut leftWing('A');
   pros::ADIDigitalOut rightWing('H');
   bool leftWing_State = false;
   bool rightWing_State = false;
+
+void autonomous() {
+
+    // Define the left side motors
+    std::vector<pros::Motor> leftMotors = {pros::Motor(3), pros::Motor(9), pros::Motor(11)};
+
+    // Define the right side motors
+    std::vector<pros::Motor> rightMotors = {pros::Motor(1), pros::Motor(19), pros::Motor(20)};
+
+    // Define the flywheel motor
+    pros::Motor flywheelMotor(15);
+
+    // Define the intake motor
+    pros::Motor intakeMotor(14);
+
+    leftWing.set_value(LOW);
+    rightWing.set_value(LOW);
+
+    // Move forward
+    for (const auto &motor : leftMotors) {
+        motor.move_velocity(100);
+    }
+    for (const auto &motor : rightMotors) {
+        motor.move_velocity(100);
+    }
+    pros::delay(600);
+    for (const auto &motor : leftMotors) {
+        motor.move_velocity(0);
+    }
+    for (const auto &motor : rightMotors) {
+        motor.move_velocity(0);
+    }
+
+    // Start intake
+    intakeMotor.move_velocity(-100);
+    pros::delay(1000);
+    intakeMotor.move_velocity(0);
+
+    pros::delay(1000);
+
+    // Change auton side here
+    // Close side auton
+    for (const auto &motor : leftMotors) {
+        motor.move_velocity(-60);
+    }
+    for (const auto &motor : rightMotors) {
+        motor.move_velocity(-50);
+    }
+    pros::delay(250);
+
+    rightWing.set_value(HIGH);
+
+    for (const auto &motor : leftMotors) {
+        motor.move_velocity(-50);
+    }
+    for (const auto &motor : rightMotors) {
+        motor.move_velocity(-50);
+    }
+    pros::delay(400);
+    for (const auto &motor : leftMotors) {
+        motor.move_velocity(-50);
+    }
+    for (const auto &motor : rightMotors) {
+        motor.move_velocity(-50);
+    }
+
+    rightWing.set_value(HIGH);
+    pros::delay(600);
+    rightWing.set_value(LOW);
+    pros::delay(1400);
+    for (const auto &motor : leftMotors) {
+        motor.move_velocity(0);
+    }
+    for (const auto &motor : rightMotors) {
+        motor.move_velocity(0);
+    }
+
+    for (const auto &motor : rightMotors) {
+        motor.move_velocity(50);
+    }
+    pros::delay(85);
+    for (const auto &motor : leftMotors) {
+        motor.move_velocity(-50);
+    }
+    pros::delay(400);
+    for (const auto &motor : leftMotors) {
+        motor.move_velocity(0);
+    }
+    for (const auto &motor : rightMotors) {
+        motor.move_velocity(0);
+    }
+
+    for (const auto &motor : leftMotors) {
+        motor.move_velocity(-50);
+    }
+    for (const auto &motor : rightMotors) {
+        motor.move_velocity(-50);
+    }
+    pros::delay(850);
+    for (const auto &motor : leftMotors) {
+        motor.move_velocity(0);
+    }
+    for (const auto &motor : rightMotors) {
+        motor.move_velocity(0);
+    }
+
+    pros::delay(250);  // Adjust the duration based on your needs
+}
+
+void opcontrol() {
 
 while (true) {
 //Drive toggle switch
